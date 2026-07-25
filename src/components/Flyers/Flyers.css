@@ -1,0 +1,188 @@
+.flyers {
+  background: var(--sf-amarillo);
+  padding-block: clamp(2.5rem, 7vw, 4rem);
+  overflow: hidden;
+}
+
+.flyers__head {
+  position: relative;
+  margin-bottom: clamp(1.6rem, 4vw, 2.6rem);
+}
+
+.flyers__title {
+  font-size: var(--fs-h2);
+  line-height: 0.9;
+  display: inline-block;
+  margin: 0;
+  margin-left: calc(-0.5 * var(--container-pad));
+}
+
+.flyers__star {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 8%;
+  top: 0;
+}
+
+/* Pared de afiches pegados: columna en mobile, escalonado en desktop */
+.flyers__wall {
+  display: grid;
+  gap: clamp(1.6rem, 5vw, 2.6rem);
+  grid-template-columns: 1fr;
+}
+
+.flyers__cell {
+  transform: rotate(var(--rot, 0deg));
+}
+
+.flyers__item {
+  display: block;
+  width: 100%;
+  border: var(--line);
+  box-shadow: var(--shadow-hard);
+  background: var(--sf-amarillo);
+  transition: transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.flyers__item img,
+.flyers__ph {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.flyers__item:hover,
+.flyers__item:focus-visible {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-hard-lg);
+}
+
+.flyers__ph {
+  display: grid;
+  place-items: center;
+  background-color: var(--sf-amarillo);
+  background-image: radial-gradient(var(--sf-navy) 1.6px, transparent 1.8px);
+  background-size: 12px 12px;
+}
+
+.flyers__ph-txt {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  color: var(--sf-navy);
+  font-size: clamp(0.85rem, 3vw, 1.1rem);
+  background: var(--sf-amarillo);
+  border: var(--line-thin);
+  padding: 0.3em 0.7em;
+}
+
+/* Mobile: misma pila que "La noche" (centrada, se apilan al scrollear) */
+@media (max-width: 559px) {
+  .flyers {
+    overflow: visible;
+    padding-bottom: clamp(3rem, 14vh, 7rem);
+  }
+  .flyers__wall {
+    display: block;
+  }
+  .flyers__cell {
+    position: sticky;
+    top: 70px;
+    /* conserva su rotación inline (--rot) para el look apilado ladeado */
+    width: min(86%, 340px);
+    margin: 0 auto clamp(1rem, 4vh, 2rem);
+  }
+}
+
+@media (min-width: 720px) {
+  .flyers__wall {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
+  /* Offset vertical alterno para romper la grilla limpia */
+  .flyers__cell:nth-child(2) { margin-top: 2.2rem; }
+  .flyers__cell:nth-child(3) { margin-top: 1rem; }
+  .flyers__cell:nth-child(4) { margin-top: -0.5rem; }
+  .flyers__cell:nth-child(5) { margin-top: 1.8rem; }
+  .flyers__cell:nth-child(6) { margin-top: 0.6rem; }
+}
+
+/* Lightbox: scrim navy (nunca negro) */
+.flyers__lb {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(0, 51, 108, 0.92);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1.5rem);
+  padding: clamp(1rem, 4vw, 2.5rem);
+}
+
+.flyers__lb-fig {
+  margin: 0;
+  justify-self: center;
+  max-width: min(92vw, 520px);
+  max-height: 86vh;
+  display: grid;
+  gap: 0.8rem;
+  overflow: auto;
+}
+
+.flyers__lb-fig img {
+  width: 100%;
+  height: auto;
+  border: var(--line);
+  box-shadow: var(--shadow-hard);
+}
+
+.flyers__ph--lb {
+  aspect-ratio: 4 / 5;
+  width: min(92vw, 520px);
+  border: var(--line);
+}
+
+.flyers__lb-fig figcaption {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  color: var(--sf-blanco);
+  text-align: center;
+  font-size: clamp(1rem, 4vw, 1.4rem);
+}
+
+.flyers__lb-btn {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  color: var(--sf-navy);
+  background: var(--sf-blanco);
+  border: var(--line);
+  box-shadow: var(--shadow-hard-rosa);
+  min-height: var(--tap-min);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.flyers__lb-btn:hover,
+.flyers__lb-btn:focus-visible {
+  transform: translate(-2px, -2px);
+}
+
+.flyers__lb-close {
+  position: absolute;
+  top: clamp(0.8rem, 3vw, 1.6rem);
+  right: clamp(0.8rem, 3vw, 1.6rem);
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+.flyers__lb-prev,
+.flyers__lb-next {
+  width: 52px;
+  height: 52px;
+  font-size: 2rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}

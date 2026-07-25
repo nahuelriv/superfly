@@ -1,0 +1,167 @@
+.hero {
+  position: relative;
+  min-height: 88vh;
+  background: var(--sf-amarillo);
+  padding: clamp(1.5rem, 5vw, 3rem) var(--container-pad) clamp(3.5rem, 8vw, 5rem);
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  align-content: center;
+}
+
+/* === Estallidos-marco a ambos lados === */
+.hero__burst {
+  position: absolute;
+  z-index: var(--z-decor);
+  top: 50%;
+  width: clamp(300px, 42vw, 560px);
+  height: clamp(300px, 42vw, 560px);
+  will-change: transform;
+}
+.hero__burst--r {
+  right: clamp(-220px, -16vw, -140px);
+  transform: translateY(-50%) rotate(-8deg)
+    translateY(calc(var(--sf-parallax, 0px) * 0.14));
+}
+.hero__burst--l {
+  left: clamp(-240px, -18vw, -160px);
+  transform: translateY(-40%) rotate(12deg)
+    translateY(calc(var(--sf-parallax, 0px) * -0.1));
+}
+
+/* === Contenido centrado === */
+.hero__inner {
+  position: relative;
+  z-index: var(--z-content);
+  max-width: 640px;
+  margin-inline: auto;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+/* Entrada escalonada al cargar (estampada, corta — §9). */
+.hero__logo,
+.hero__aviso,
+.hero__tagline,
+.hero__ctas {
+  animation: sf-stamp-plain 300ms var(--ease-out) both;
+}
+.hero__logo  { animation-delay: 80ms; }
+.hero__aviso { animation-delay: 200ms; }
+.hero__tagline { animation-delay: 320ms; }
+.hero__ctas  { animation-delay: 420ms; }
+
+@keyframes sf-stamp-plain {
+  0%   { opacity: 0; transform: translateY(18px) scale(0.9); }
+  60%  { opacity: 1; transform: translateY(-4px) scale(1.02); }
+  100% { opacity: 1; transform: none; }
+}
+
+.hero__logo {
+  margin: 0;
+}
+.hero__logo img {
+  width: clamp(300px, 86vw, 640px);
+  height: auto;
+}
+
+.hero__aviso {
+  display: grid;
+  justify-items: center;
+  margin: clamp(0.8rem, 3vw, 1.6rem) 0 0;
+  line-height: 0.78;
+}
+
+/* Cada renglón es un flex de palabras; se permiten desalineadas a propósito */
+.hero__aviso-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.05em 0.22em;
+}
+.hero__aviso-line--2 {
+  margin-top: -0.06em;
+}
+
+/* Tamaño por palabra; las letras van derechas con salto vertical (WildTitle) */
+.hero__word--a0 { /* SE */    font-size: clamp(2rem, 10vw, 4rem); }
+.hero__word--a1 { /* VIENE */ font-size: clamp(2.7rem, 13.5vw, 6rem); }
+.hero__word--b0 { /* ALGO */  font-size: clamp(1.5rem, 7vw, 3rem); }
+.hero__word--b1 { /* ENORME */font-size: clamp(2.4rem, 11.5vw, 5rem); }
+
+/* Tagline como sticker de flyer: caja blanca, borde navy, sombra dura, ladeada */
+.hero__tagline {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--sf-navy);
+  font-size: clamp(0.9rem, 3.6vw, 1.25rem);
+  line-height: 1;
+  margin: clamp(1rem, 3vw, 1.6rem) 0 0;
+  background: var(--sf-blanco);
+  border: var(--line);
+  box-shadow: var(--shadow-hard-rosa);
+  padding: 0.5rem 0.9rem;
+  transform: rotate(-2deg);
+}
+
+/* === CTAs (entradas arriba, votación debajo; centrados) === */
+.hero__ctas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.9rem, 3vw, 1.3rem);
+  margin-top: clamp(1.4rem, 4vw, 2.2rem);
+}
+
+/* === Decoración repartida (lejos del texto centrado) === */
+.hero__star { position: absolute; z-index: var(--z-decor); will-change: transform; }
+.hero__star--1 { width: 30px; height: 30px; top: 10%; left: 8%; }
+.hero__star--2 { width: 24px; height: 24px; top: 16%; right: 10%; }
+.hero__star--3 { width: 26px; height: 26px; bottom: 16%; left: 12%; }
+.hero__star--4 { width: 22px; height: 22px; bottom: 12%; right: 14%; }
+
+.hero__bricks { position: absolute; z-index: var(--z-decor); width: 96px; height: 64px; }
+.hero__bricks--tl { top: 5%; left: 3%; transform: rotate(-8deg); }
+.hero__bricks--br { bottom: 8%; right: 3%; transform: rotate(8deg); }
+
+.hero__dashes { position: absolute; z-index: var(--z-decor); width: 66px; height: 66px; }
+.hero__dashes--l { top: 42%; left: 2%; transform: scaleX(-1); }
+.hero__dashes--r { top: 40%; right: 2%; }
+
+/* === Indicador de scroll (#19) === */
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(0.8rem, 3vw, 1.6rem);
+  transform: translateX(-50%);
+  z-index: var(--z-content);
+  display: grid;
+  justify-items: center;
+  gap: 0.2rem;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: var(--fs-label);
+  color: var(--sf-navy);
+}
+.hero__scroll-arrow {
+  width: 26px;
+  height: 26px;
+  animation: hero-bounce 1.4s var(--ease-out) infinite;
+}
+@keyframes hero-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+.hero__scroll:focus-visible { outline: 3px solid var(--sf-navy); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__logo,
+  .hero__aviso,
+  .hero__tagline,
+  .hero__ctas { animation: none; }
+  .hero__scroll-arrow { animation: none; }
+}

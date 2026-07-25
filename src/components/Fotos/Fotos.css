@@ -1,0 +1,250 @@
+.fotos {
+  background: var(--sf-amarillo);
+  padding-block: clamp(2rem, 6vw, 3.5rem);
+  overflow: hidden;
+}
+
+.fotos__head {
+  position: relative;
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.fotos__title {
+  font-size: var(--fs-h2);
+  line-height: 0.9;
+  display: inline-block;
+  margin: 0;
+  margin-left: calc(-0.5 * var(--container-pad));
+}
+
+.fotos__star {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 6%;
+  top: 0;
+}
+
+/* Collage: mobile = columna con rotación alterna */
+.fotos__grid {
+  display: grid;
+  gap: clamp(1.4rem, 4vw, 2.4rem);
+  grid-template-columns: 1fr;
+}
+
+.fotos__cell {
+  position: relative;
+  transform: rotate(var(--rot, 0deg));
+}
+
+.fotos__btn {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out),
+    filter var(--dur-fast) var(--ease-out);
+}
+
+.fotos__btn:hover,
+.fotos__btn:focus-visible {
+  transform: translate(-3px, -3px);
+}
+
+.fotos__btn:hover .fotos__img,
+.fotos__btn:focus-visible .fotos__img {
+  box-shadow: var(--shadow-hard-lg);
+}
+
+.fotos__img,
+.fotos__ph {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--ratio, 4 / 5);
+  object-fit: cover;
+  border: var(--line);
+  box-shadow: var(--shadow-hard);
+  background: var(--sf-amarillo);
+}
+
+/* Placeholder del sistema (nunca caja gris) */
+.fotos__ph {
+  display: grid;
+  place-items: center;
+  background-color: var(--sf-amarillo);
+  background-image: radial-gradient(var(--sf-navy) 1.6px, transparent 1.8px);
+  background-size: 12px 12px;
+}
+
+.fotos__ph-txt {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  color: var(--sf-navy);
+  font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+  background: var(--sf-amarillo);
+  border: var(--line-thin);
+  padding: 0.3em 0.7em;
+}
+
+.fotos__burst {
+  position: absolute;
+  width: 55%;
+  height: 55%;
+  top: -10%;
+  left: -12%;
+  z-index: 0;
+}
+
+/* Duotono cyan para fotos que vengan "frías" (sin luz rosa/cyan). Dormido
+   hasta marcar `frio: true` en festival.js. Como los retratos de DJ. */
+.fotos__cell--frio .fotos__img {
+  filter: grayscale(1) contrast(1.05);
+}
+
+.fotos__cell--frio .fotos__btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--sf-cyan);
+  mix-blend-mode: color;
+  pointer-events: none;
+}
+
+/* Tablet: 2 columnas, la destacada ocupa las dos */
+@media (min-width: 560px) {
+  .fotos__grid {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+  }
+  .fotos__cell--big { grid-column: span 2; }
+  /* Solape/escalonado leve para que no lea como grilla limpia */
+  .fotos__cell:nth-child(3n) { margin-top: clamp(0.5rem, 2vw, 1.4rem); }
+}
+
+/* Desktop: 3 columnas */
+@media (min-width: 900px) {
+  .fotos__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .fotos__cell--big { grid-column: span 2; }
+  .fotos__cell:nth-child(even) { margin-top: clamp(0.5rem, 1.5vw, 1.4rem); }
+}
+
+/* Lightbox: scrim navy (nunca negro). Foto al máximo; botones como overlay. */
+.fotos__lb {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(0, 51, 108, 0.92);
+  display: grid;
+  place-items: center;
+  padding: clamp(0.8rem, 3vw, 2rem);
+}
+
+.fotos__lb-fig {
+  margin: 0;
+  display: grid;
+  gap: 0.7rem;
+  width: min(96vw, 900px);
+  justify-items: center;
+}
+
+.fotos__lb-fig img {
+  width: auto;
+  max-width: 100%;
+  max-height: 82vh;
+  object-fit: contain;
+  border: var(--line);
+  box-shadow: var(--shadow-hard);
+  background: var(--sf-amarillo);
+}
+
+.fotos__lb-fig figcaption {
+  font-family: var(--font-body);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--sf-blanco);
+  text-align: center;
+  font-size: clamp(0.78rem, 3vw, 1rem);
+}
+
+.fotos__lb-btn {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  color: var(--sf-navy);
+  background: var(--sf-blanco);
+  border: var(--line);
+  box-shadow: var(--shadow-hard-rosa);
+  min-height: var(--tap-min);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.fotos__lb-close {
+  position: absolute;
+  top: clamp(0.8rem, 3vw, 1.6rem);
+  right: clamp(0.8rem, 3vw, 1.6rem);
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+}
+.fotos__lb-close:hover,
+.fotos__lb-close:focus-visible {
+  transform: translate(-2px, -2px);
+}
+
+/* Prev/next como overlay a los lados, centrados verticalmente */
+.fotos__lb-prev,
+.fotos__lb-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  font-size: 1.9rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+.fotos__lb-prev { left: clamp(0.4rem, 2vw, 1.4rem); }
+.fotos__lb-next { right: clamp(0.4rem, 2vw, 1.4rem); }
+
+.fotos__lb-prev:hover,
+.fotos__lb-prev:focus-visible,
+.fotos__lb-next:hover,
+.fotos__lb-next:focus-visible {
+  transform: translateY(-50%) scale(1.08);
+}
+
+/* === Mobile: pila de fotos que se apilan al scrollear (última arriba) === */
+@media (max-width: 559px) {
+  .fotos {
+    overflow: visible; /* sticky no funciona con ancestro overflow:hidden */
+    padding-bottom: clamp(3rem, 14vh, 7rem); /* aire para que la última se asiente */
+  }
+  .fotos__grid {
+    display: block;
+  }
+  .fotos__cell {
+    position: sticky;
+    top: 70px;
+    /* mantiene su rotación inline (--rot) para el look apilado ladeado */
+    width: min(86%, 340px);
+    margin: 0 auto clamp(1rem, 4vh, 2rem);
+  }
+  /* Tamaño uniforme: todas 4/5, así la de arriba tapa por completo a la anterior */
+  .fotos__cell .fotos__img,
+  .fotos__cell .fotos__ph {
+    aspect-ratio: 4 / 5;
+  }
+  /* El estallido descentra la pila: fuera en mobile */
+  .fotos__burst {
+    display: none;
+  }
+}

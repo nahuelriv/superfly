@@ -1,0 +1,40 @@
+.wild {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0 0.28em; /* separación entre palabras */
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.82;
+}
+
+/* La palabra no se corta: sus letras van juntas */
+.wild__word {
+  display: inline-flex;
+  align-items: center;
+}
+
+.wild__l {
+  position: relative;
+  z-index: 0; /* contexto propio para que el eco no caiga tras el fondo */
+  display: inline-block;
+  color: var(--sf-navy);
+  -webkit-text-stroke: 2px var(--sf-blanco);
+  paint-order: stroke fill;
+  transform: rotate(var(--rot, 0deg)) translateY(calc(var(--dy, 0) * 1em));
+}
+
+/* Eco de contorno rosa hueco por letra */
+.wild__l::before {
+  content: attr(data-ch);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  color: transparent;
+  -webkit-text-stroke: 3px var(--sf-rosa);
+  paint-order: stroke;
+  transform: translate(0.05em, 0.06em);
+  pointer-events: none;
+}

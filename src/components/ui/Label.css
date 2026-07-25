@@ -1,0 +1,53 @@
+.sf-label {
+  --sh-color: var(--sf-rosa);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 3.4vw, 1.1rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--sf-navy);
+  padding: 0.55em 0.9em;
+  border: var(--line);
+  box-shadow: 5px 5px 0 var(--sh-color);
+  transform: rotate(var(--rot, 0deg));
+}
+
+.sf-label__text {
+  position: relative;
+  z-index: 1;
+}
+
+/* Variantes de relleno */
+.sf-label--blanco  { background: var(--sf-blanco); }
+.sf-label--amarillo { background: var(--sf-amarillo); }
+.sf-label--rosa    { background: var(--sf-rosa); }
+.sf-label--cyan    { background: var(--sf-cyan); }
+.sf-label--navy    { background: var(--sf-navy); color: var(--sf-blanco); }
+
+/* Sombra dura */
+.sf-label--sh-rosa { --sh-color: var(--sf-rosa); }
+.sf-label--sh-navy { --sh-color: var(--sf-navy); }
+.sf-label--sh-cyan { --sh-color: var(--sf-cyan); }
+.sf-label--sh-none { box-shadow: none; }
+
+/* Franja de halftone en el borde inferior (como los tags de género del flyer) */
+.sf-label--halftone::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40%;
+  background-image: radial-gradient(var(--sf-navy) 1.4px, transparent 1.6px);
+  background-size: 7px 7px;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.sf-label--navy.sf-label--halftone::after {
+  background-image: radial-gradient(var(--sf-blanco) 1.4px, transparent 1.6px);
+}

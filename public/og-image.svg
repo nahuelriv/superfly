@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2" fill="#FF5DA2" opacity="0.16"/>
+    </pattern>
+    <radialGradient id="rays" cx="50%" cy="42%" r="70%">
+      <stop offset="0%" stop-color="#FFD062"/>
+      <stop offset="100%" stop-color="#F9B42D"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#rays)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Festival eyebrow -->
+  <g transform="translate(600 130)">
+    <rect x="-200" y="-18" width="80" height="6" fill="#FF5DA2" stroke="#111418" stroke-width="2"/>
+    <text x="0" y="0" text-anchor="middle"
+          font-family="'Bungee', sans-serif" font-size="26" letter-spacing="8"
+          fill="#FF5DA2" stroke="#111418" stroke-width="1.5" paint-order="stroke">FESTIVAL</text>
+    <rect x="120" y="-18" width="80" height="6" fill="#FF5DA2" stroke="#111418" stroke-width="2"/>
+  </g>
+
+  <!-- Logo SuperFly! -->
+  <g transform="translate(600 290) rotate(-3)">
+    <text text-anchor="middle"
+          font-family="'Bagel Fat One', system-ui, sans-serif" font-size="180"
+          fill="#29C2D6" stroke="#111418" stroke-width="8" paint-order="stroke"
+          style="filter: drop-shadow(8px 8px 0 #16285E) drop-shadow(14px 14px 0 #111418);">
+      SuperFly!
+    </text>
+  </g>
+
+  <!-- Próximamente cartel -->
+  <g transform="translate(600 440) rotate(-1.5)">
+    <rect x="-260" y="-40" width="520" height="80"
+          fill="#FFFFFF" stroke="#111418" stroke-width="4" rx="10"
+          style="filter: drop-shadow(8px 8px 0 #111418);"/>
+    <text x="0" y="14" text-anchor="middle"
+          font-family="'Bungee', sans-serif" font-size="48" letter-spacing="3"
+          fill="#16285E" stroke="#111418" stroke-width="2.5" paint-order="stroke">PRÓXIMAMENTE</text>
+    <rect x="-285" y="-52" width="52" height="20" fill="#FF5DA2" stroke="#111418" stroke-width="2"
+          transform="rotate(-14 -260 -42)"/>
+    <rect x="235" y="-52" width="52" height="20" fill="#29C2D6" stroke="#111418" stroke-width="2"
+          transform="rotate(13 260 -42)"/>
+  </g>
+
+  <text x="600" y="540" text-anchor="middle"
+        font-family="'Archivo', system-ui, sans-serif" font-size="22" font-weight="700"
+        fill="#16285E">Pronto vuelve el mejor festival del mundo.</text>
+
+  <!-- Decoraciones -->
+  <g fill="#FFFFFF" stroke="#111418" stroke-width="3" stroke-linejoin="round">
+    <path d="M120 80 L130 110 L160 120 L130 130 L120 160 L110 130 L80 120 L110 110 Z"/>
+    <path d="M1080 100 L1088 124 L1112 132 L1088 140 L1080 164 L1072 140 L1048 132 L1072 124 Z" fill="#FF5DA2"/>
+    <path d="M80 470 L88 494 L112 502 L88 510 L80 534 L72 510 L48 502 L72 494 Z" fill="#29C2D6"/>
+    <path d="M1100 480 L1108 504 L1132 512 L1108 520 L1100 544 L1092 520 L1068 512 L1092 504 Z"/>
+  </g>
+
+  <!-- Cinta inferior diagonal -->
+  <rect x="0" y="600" width="1200" height="30" fill="#FF5DA2" stroke="#111418" stroke-width="3"/>
+  <pattern id="diag" patternUnits="userSpaceOnUse" width="24" height="24" patternTransform="rotate(45)">
+    <rect width="12" height="24" fill="#F9B42D"/>
+  </pattern>
+  <rect x="0" y="600" width="1200" height="30" fill="url(#diag)" opacity="0.55"/>
+</svg>

@@ -1,0 +1,58 @@
+.ticketbtn-wrap {
+  display: inline-grid;
+  justify-items: center;
+  gap: 0.5rem;
+}
+
+.ticketbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: clamp(1.1rem, 5vw, 1.6rem);
+  color: var(--sf-navy);
+  background: var(--sf-rosa);
+  border: var(--line);
+  box-shadow: var(--shadow-hard);
+  padding: 0.85rem 1.6rem;
+  text-align: center;
+}
+
+/* Habilitado: micro-interacción (#12), se presiona hacia la sombra */
+.ticketbtn--on {
+  transition: transform 150ms var(--sf-ease), box-shadow 150ms var(--sf-ease);
+}
+
+.ticketbtn--on:hover,
+.ticketbtn--on:focus-visible {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--sf-navy);
+}
+
+.ticketbtn--on:active {
+  transform: translate(6px, 6px);
+  box-shadow: 0 0 0 var(--sf-navy);
+}
+
+/* Deshabilitado: sin movimiento, sombra plana, no clickeable */
+.ticketbtn--off {
+  opacity: 0.65;
+  cursor: not-allowed;
+  box-shadow: 2px 2px 0 var(--sf-navy);
+  transition: opacity 150ms var(--sf-ease);
+}
+
+.ticketbtn--off:hover {
+  opacity: 0.78; /* feedback sutil de hover, sin habilitar */
+}
+
+.ticketbtn__soon {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: var(--fs-label);
+  color: var(--sf-navy);
+}

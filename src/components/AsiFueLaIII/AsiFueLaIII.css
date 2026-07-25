@@ -1,0 +1,101 @@
+.asifue {
+  position: relative;
+  background: var(--sf-amarillo);
+  padding-block: clamp(2.5rem, 7vw, 4rem);
+  overflow: hidden;
+  scroll-margin-top: 64px;
+}
+
+/* Estallido de fondo, desborda por la derecha */
+.asifue__bg-burst {
+  position: absolute;
+  width: clamp(280px, 46vw, 520px);
+  height: clamp(280px, 46vw, 520px);
+  top: 50%;
+  right: clamp(-180px, -14vw, -100px);
+  transform: translateY(-50%) rotate(10deg);
+  z-index: var(--z-decor);
+  opacity: 0.9;
+}
+
+.asifue__inner {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.asifue__title {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.2rem 1rem;
+  margin: 0;
+  margin-left: calc(-0.5 * var(--container-pad));
+}
+
+.asifue__title-txt {
+  font-size: clamp(2.6rem, 13vw, 5.5rem);
+  line-height: 0.85;
+}
+
+.asifue__edicion {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  padding: 0.1em 0.4em;
+}
+
+.asifue__edicion-burst {
+  position: absolute;
+  inset: -45% -30%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+}
+
+.asifue__edicion-txt {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(3.5rem, 20vw, 8rem);
+}
+
+.asifue__datos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem 1.6rem;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.asifue__resumen {
+  position: relative;
+  font-family: var(--font-body);
+  font-weight: 800;
+  color: var(--sf-navy);
+  font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+  line-height: 1.3;
+  max-width: 22ch;
+  margin-top: clamp(1.4rem, 4vw, 2rem);
+  background: var(--sf-amarillo);
+  border: var(--line);
+  box-shadow: var(--shadow-hard-rosa);
+  padding: 0.9rem 1.1rem;
+  transform: rotate(-1deg);
+}
+
+/* Decorado de densidad (siempre a la derecha, sobre el estallido, lejos del texto) */
+.asifue__star { position: absolute; z-index: var(--z-decor); }
+.asifue__star--1 { width: 28px; height: 28px; top: 6%; right: 8%; }
+.asifue__star--2 { width: 22px; height: 22px; bottom: 14%; right: 6%; }
+
+.asifue__bricks {
+  position: absolute;
+  width: 88px;
+  height: 58px;
+  bottom: 10%;
+  right: 12%;
+  transform: rotate(-6deg);
+  z-index: var(--z-decor);
+}
+
+@media (min-width: 760px) {
+  .asifue__resumen { max-width: 34ch; }
+}

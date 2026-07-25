@@ -1,0 +1,84 @@
+.navmin {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem clamp(0.8rem, 4vw, 1.6rem);
+  min-height: 56px;
+  transition: transform var(--dur-mid) var(--sf-ease),
+    background-color var(--dur-mid) var(--ease-out),
+    border-color var(--dur-mid) var(--ease-out);
+}
+
+/* Arranca transparente en el tope */
+.navmin--top {
+  background: transparent;
+  border-bottom: 3px solid transparent;
+}
+
+/* Sólido cuando ya no estamos en el tope */
+.navmin--solid {
+  background: var(--sf-amarillo);
+  border-bottom: 3px solid var(--sf-navy);
+}
+
+/* Hide-on-scroll: se oculta hacia arriba, sin display:none */
+.navmin--hidden {
+  transform: translateY(-100%);
+}
+
+/* Logo: oculto hasta pasar el hero, entra con fade + slide desde arriba */
+.navmin__brand {
+  display: inline-flex;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+  transition: opacity var(--dur-mid) var(--ease-out),
+    transform var(--dur-mid) var(--sf-ease);
+}
+.navmin__brand--in {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.navmin__brand img {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border: var(--line-thin);
+  box-shadow: 3px 3px 0 var(--sf-rosa);
+}
+
+.navmin__ig {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+  color: var(--sf-navy);
+  background: var(--sf-blanco);
+  border: var(--line-thin);
+  box-shadow: 4px 4px 0 var(--sf-rosa);
+  transition: transform var(--dur-fast) var(--sf-ease),
+    box-shadow var(--dur-fast) var(--sf-ease);
+}
+.navmin__ig svg { width: 20px; height: 20px; }
+
+.navmin__ig:hover,
+.navmin__ig:focus-visible {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--sf-rosa);
+}
+.navmin__ig:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--sf-rosa);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navmin,
+  .navmin__brand { transition: none; }
+}

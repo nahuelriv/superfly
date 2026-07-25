@@ -1,0 +1,6 @@
+.animcounter {
+  font-family: var(--font-display);
+  color: var(--sf-navy);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}

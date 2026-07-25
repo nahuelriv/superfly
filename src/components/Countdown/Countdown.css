@@ -1,0 +1,43 @@
+.countdown {
+  background: var(--sf-amarillo);
+}
+
+.countdown__grid {
+  display: flex;
+  justify-content: center;
+  gap: clamp(0.8rem, 4vw, 2rem);
+  padding-block: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+.countdown__unit {
+  display: grid;
+  justify-items: center;
+  gap: 0.3rem;
+  min-width: clamp(72px, 22vw, 120px);
+  padding: clamp(0.6rem, 2vw, 1rem);
+  background: var(--sf-blanco);
+  border: var(--line);
+  box-shadow: var(--shadow-hard-rosa);
+}
+
+.countdown__num {
+  font-family: var(--font-display);
+  color: var(--sf-navy);
+  font-size: clamp(2.4rem, 12vw, 4.5rem);
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown__label {
+  font-family: var(--font-body);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: var(--fs-label);
+  color: var(--sf-navy);
+}
+
+/* Con contador presente, la franja va reducida abajo */
+.countdown__strip {
+  --marquee-scale: 0.8;
+}
