@@ -3,7 +3,6 @@ import Hero from "./components/Hero/Hero";
 import AsiFueLaIII from "./components/AsiFueLaIII/AsiFueLaIII";
 import Fotos from "./components/Fotos/Fotos";
 import Flyers from "./components/Flyers/Flyers";
-import QueHabia from "./components/QueHabia/QueHabia";
 import NotifyForm from "./components/NotifyForm/NotifyForm";
 import Countdown from "./components/Countdown/Countdown";
 import Footer from "./components/Footer/Footer";
@@ -41,7 +40,6 @@ export default function App() {
         <Reveal><Fotos /></Reveal>
         <Reveal><Flyers /></Reveal>
         <Countdown />
-        <Reveal><QueHabia /></Reveal>
         <Reveal><NotifyForm /></Reveal>
       </main>
 

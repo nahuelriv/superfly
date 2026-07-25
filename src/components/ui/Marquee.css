@@ -9,6 +9,23 @@
 .marquee--cyan     { background: var(--sf-cyan); }
 .marquee--amarillo { background: var(--sf-amarillo); }
 
+/* Franja inclinada: más ancha que el viewport para que al rotar no queden
+   huecos en los costados. */
+.marquee--tilt {
+  position: relative;
+  z-index: var(--z-content);
+  width: 116%;
+  margin-inline: -8%;
+  transform: rotate(var(--tilt, -2.5deg));
+}
+
+/* Marco que rellena los huecos de la inclinación con un color sólido y recorta
+   el excedente para que el borde exterior quede recto. */
+.marquee-frame {
+  overflow: hidden;
+  padding-block: clamp(12px, 4vw, 22px);
+}
+
 .marquee__track {
   display: inline-flex;
   align-items: center;

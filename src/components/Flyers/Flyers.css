@@ -84,11 +84,10 @@
     overflow: visible;
     padding-bottom: clamp(1rem, 4vh, 2rem);
   }
-  /* Título fijo arriba mientras se apilan, sin fondo. */
+  /* Título NO fijo: scrollea normal y se va antes de que suban los flyers, sin
+     banda amarilla ni texto superpuesto. La pila se mantiene. */
   .flyers__head {
-    position: sticky;
-    top: 54px;
-    z-index: 6;
+    position: static;
     margin-bottom: clamp(1rem, 3vh, 1.6rem);
   }
   .flyers__wall {
@@ -96,7 +95,7 @@
   }
   .flyers__cell {
     position: sticky;
-    top: 118px; /* siempre debajo del título: nunca se superponen */
+    top: 100px; /* arriba, pero con aire respecto de la navbar (~60px) */
     /* conserva su rotación inline (--rot) para el look apilado ladeado */
     width: min(86%, 340px);
     margin: 0 auto clamp(1rem, 4vh, 2rem);
@@ -119,39 +118,40 @@
   .flyers__cell:nth-child(6) { margin-top: 0.6rem; }
 }
 
-/* Lightbox: scrim navy (nunca negro) */
+/* Lightbox: scrim navy (nunca negro). Flyer al máximo; botones como overlay. */
 .flyers__lb {
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
   background: rgba(0, 51, 108, 0.92);
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: clamp(0.5rem, 2vw, 1.5rem);
-  padding: clamp(1rem, 4vw, 2.5rem);
+  place-items: center;
+  padding: clamp(0.8rem, 3vw, 2rem);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .flyers__lb-fig {
   margin: 0;
-  justify-self: center;
-  max-width: min(92vw, 520px);
-  max-height: 86vh;
   display: grid;
-  gap: 0.8rem;
-  overflow: auto;
+  gap: 0.7rem;
+  width: min(96vw, 560px);
+  justify-items: center;
 }
 
 .flyers__lb-fig img {
-  width: 100%;
-  height: auto;
+  width: auto;
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
   border: var(--line);
   box-shadow: var(--shadow-hard);
+  background: var(--sf-amarillo);
 }
 
 .flyers__ph--lb {
   aspect-ratio: 4 / 5;
-  width: min(92vw, 520px);
+  width: min(90vw, 460px);
   border: var(--line);
 }
 
@@ -174,11 +174,6 @@
   transition: transform var(--dur-fast) var(--ease-out);
 }
 
-.flyers__lb-btn:hover,
-.flyers__lb-btn:focus-visible {
-  transform: translate(-2px, -2px);
-}
-
 .flyers__lb-close {
   position: absolute;
   top: clamp(0.8rem, 3vw, 1.6rem);
@@ -186,13 +181,30 @@
   padding: 0.5rem 0.9rem;
   font-size: 0.85rem;
 }
+.flyers__lb-close:hover,
+.flyers__lb-close:focus-visible {
+  transform: translate(-2px, -2px);
+}
 
+/* Prev/next como overlay a los lados, centrados verticalmente */
 .flyers__lb-prev,
 .flyers__lb-next {
-  width: 52px;
-  height: 52px;
-  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  font-size: 1.9rem;
   line-height: 1;
   display: grid;
   place-items: center;
+}
+.flyers__lb-prev { left: clamp(0.4rem, 2vw, 1.4rem); }
+.flyers__lb-next { right: clamp(0.4rem, 2vw, 1.4rem); }
+
+.flyers__lb-prev:hover,
+.flyers__lb-prev:focus-visible,
+.flyers__lb-next:hover,
+.flyers__lb-next:focus-visible {
+  transform: translateY(-50%) scale(1.08);
 }

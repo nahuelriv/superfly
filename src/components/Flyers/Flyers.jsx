@@ -31,7 +31,7 @@ export default function Flyers() {
       <div className="sf-container">
         <header className="flyers__head">
           <h2 id="flyers-title" className="flyers__title">
-            <WildTitle text="¿Qué pasó?" />
+            <WildTitle text="Rewind" />
           </h2>
           <Star className="flyers__star" color="var(--sf-cyan)" />
         </header>

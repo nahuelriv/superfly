@@ -7,11 +7,17 @@ export default function Marquee({
   texto = "SUPERFLY!",
   variant = "rosa", // "rosa" | "cyan" | "amarillo"
   repeticiones = 8,
+  tilt = 0, // inclinación en grados (0 = recta)
+  fill, // color de relleno de los huecos que deja la inclinación
   className = "",
 }) {
   const items = Array.from({ length: repeticiones });
-  return (
-    <div className={`marquee marquee--${variant} ${className}`} aria-hidden="true">
+  const band = (
+    <div
+      className={`marquee marquee--${variant} ${tilt ? "marquee--tilt" : ""} ${className}`}
+      style={tilt ? { "--tilt": `${tilt}deg` } : undefined}
+      aria-hidden="true"
+    >
       <div className="marquee__track">
         {items.map((_, i) => (
           <span className="marquee__item" key={i}>
@@ -22,4 +28,14 @@ export default function Marquee({
       </div>
     </div>
   );
+
+  // Marco que rellena los huecos del triángulo (por la inclinación) con `fill`.
+  if (fill) {
+    return (
+      <div className="marquee-frame" style={{ background: fill }}>
+        {band}
+      </div>
+    );
+  }
+  return band;
 }

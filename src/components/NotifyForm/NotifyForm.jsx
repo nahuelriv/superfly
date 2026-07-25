@@ -61,7 +61,7 @@ export default function NotifyForm() {
                   type="submit"
                   disabled={status === "enviando"}
                 >
-                  {status === "enviando" ? "Enviando…" : "Avisame"}
+                  {status === "enviando" ? "Enviando…" : "Sumarme"}
                 </button>
               </form>
               {status === "error" && (

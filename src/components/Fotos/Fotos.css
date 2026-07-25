@@ -243,11 +243,10 @@
     overflow: visible; /* sticky no funciona con ancestro overflow:hidden */
     padding-bottom: clamp(1rem, 4vh, 2rem);
   }
-  /* Título fijo arriba mientras se apilan, sin fondo. */
+  /* Título NO fijo: scrollea normal y se va antes de que suban las fotos, así
+     no hay banda amarilla ni texto superpuesto. La pila de fotos se mantiene. */
   .fotos__head {
-    position: sticky;
-    top: 54px; /* debajo de la navbar */
-    z-index: 6; /* por encima de las fotos */
+    position: static;
     margin-bottom: clamp(1rem, 3vh, 1.6rem);
   }
   .fotos__grid {
@@ -255,7 +254,7 @@
   }
   .fotos__cell {
     position: sticky;
-    top: 118px; /* siempre debajo del título: nunca se superponen */
+    top: 100px; /* arriba, pero con aire respecto de la navbar (~60px) */
     /* mantiene su rotación inline (--rot) para el look apilado ladeado */
     width: min(86%, 340px);
     margin: 0 auto clamp(1rem, 4vh, 2rem);
