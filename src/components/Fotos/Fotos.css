@@ -128,13 +128,28 @@
   .fotos__cell:nth-child(3n) { margin-top: clamp(0.5rem, 2vw, 1.4rem); }
 }
 
-/* Desktop: 3 columnas */
+/* Desktop: collage de antes (tamaños variados, rotación, aire), pero la foto
+   grande ocupa 2 filas para que a su lado se apilen 2 fotos y no quede el hueco
+   amarillo grande. */
 @media (min-width: 900px) {
   .fotos__grid {
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: dense;
+    align-items: start; /* las chicas conservan su alto por aspect-ratio */
   }
-  .fotos__cell--big { grid-column: span 2; }
-  .fotos__cell:nth-child(even) { margin-top: clamp(0.5rem, 1.5vw, 1.4rem); }
+  .fotos__cell {
+    margin: 0; /* anula el escalonado heredado del breakpoint tablet */
+  }
+  .fotos__cell--big {
+    grid-column: span 2;
+    grid-row: span 2;
+    align-self: stretch; /* la grande llena el alto de las 2 filas (sin hueco) */
+  }
+  .fotos__cell--big .fotos__img,
+  .fotos__cell--big .fotos__ph {
+    height: 100%;
+    aspect-ratio: auto;
+  }
 }
 
 /* Lightbox: scrim navy (nunca negro). Foto al máximo; botones como overlay. */
@@ -228,12 +243,19 @@
     overflow: visible; /* sticky no funciona con ancestro overflow:hidden */
     padding-bottom: clamp(3rem, 14vh, 7rem); /* aire para que la última se asiente */
   }
+  /* Título fijo arriba mientras las fotos se apilan debajo */
+  .fotos__head {
+    position: sticky;
+    top: 58px;
+    z-index: 5;
+    margin-bottom: clamp(1rem, 3vh, 1.6rem);
+  }
   .fotos__grid {
     display: block;
   }
   .fotos__cell {
     position: sticky;
-    top: 70px;
+    top: 150px;
     /* mantiene su rotación inline (--rot) para el look apilado ladeado */
     width: min(86%, 340px);
     margin: 0 auto clamp(1rem, 4vh, 2rem);

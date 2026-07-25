@@ -85,14 +85,16 @@
   background: rgba(0, 51, 108, 0.92);
   display: grid;
   place-items: center;
-  padding: clamp(1rem, 4vw, 2rem);
+  padding: clamp(0.8rem, 3vw, 2rem);
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
 .tourvote__box {
   position: relative;
-  width: min(96vw, 480px);
+  width: min(100%, 480px); /* 100% del modal (ya sin el padding) -> sin scroll lateral */
   max-height: 90vh;
+  overflow-x: hidden;
   overflow-y: auto;
   background: var(--sf-amarillo);
   border: var(--line);
@@ -195,41 +197,42 @@
   position: relative;
   display: grid;
   justify-items: center;
+  align-content: center;
   text-align: center;
-  gap: 0.6rem;
-  padding: clamp(1.5rem, 6vw, 2.5rem) 0;
+  gap: 0.7rem;
+  min-height: 260px;
+  padding: clamp(1.5rem, 6vw, 2.5rem) 0.5rem;
 }
 
 .tourvote__ok-burst {
   position: absolute;
-  inset: -10% -6%;
-  width: auto;
-  height: auto;
+  inset: 50% 50%;
+  width: min(115%, 360px);
+  height: min(115%, 360px);
+  transform: translate(-50%, -50%);
   z-index: 0;
-  opacity: 0.9;
+}
+
+.tourvote__ok-plane {
+  position: relative;
+  z-index: 1;
+  width: clamp(46px, 13vw, 62px);
+  height: auto;
+  color: var(--sf-navy);
+  transform: rotate(-14deg);
 }
 
 .tourvote__ok-main {
   position: relative;
   z-index: 1;
   margin: 0;
-  font-size: clamp(1.8rem, 9vw, 3rem);
-  line-height: 0.95;
-  text-shadow: 4px 4px 0 var(--sf-rosa);
-}
-
-.tourvote__ok-sub {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin: 0;
-  font-family: var(--font-body);
-  font-weight: 800;
+  font-family: var(--font-display);
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  color: var(--sf-navy);
-  font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+  color: var(--sf-blanco);
+  -webkit-text-stroke: 3px var(--sf-navy);
+  paint-order: stroke fill;
+  text-shadow: 4px 4px 0 var(--sf-navy);
+  font-size: clamp(1.9rem, 9vw, 2.9rem);
+  line-height: 0.88;
+  max-width: 11ch;
 }
-.tourvote__ok-note { width: 22px; height: 22px; color: var(--sf-navy); }

@@ -8,6 +8,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   min-height: var(--tap-min);
   font-family: var(--font-display);
   text-transform: uppercase;
@@ -19,6 +20,12 @@
   box-shadow: var(--shadow-hard);
   padding: 0.85rem 1.6rem;
   text-align: center;
+}
+
+.ticketbtn__lock {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 /* Habilitado: micro-interacción (#12), se presiona hacia la sombra */
@@ -37,16 +44,13 @@
   box-shadow: 0 0 0 var(--sf-navy);
 }
 
-/* Deshabilitado: sin movimiento, sombra plana, no clickeable */
+/* Deshabilitado: "ghost" opaco (amarillo + contorno navy), plano, no clickeable.
+   Sin transparencia (no se ensucia con lo que haya detrás). */
 .ticketbtn--off {
-  opacity: 0.65;
+  background: var(--sf-amarillo);
+  color: var(--sf-navy);
+  box-shadow: none;
   cursor: not-allowed;
-  box-shadow: 2px 2px 0 var(--sf-navy);
-  transition: opacity 150ms var(--sf-ease);
-}
-
-.ticketbtn--off:hover {
-  opacity: 0.78; /* feedback sutil de hover, sin habilitar */
 }
 
 .ticketbtn__soon {

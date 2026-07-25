@@ -84,12 +84,19 @@
     overflow: visible;
     padding-bottom: clamp(3rem, 14vh, 7rem);
   }
+  /* Título fijo arriba mientras los flyers se apilan debajo */
+  .flyers__head {
+    position: sticky;
+    top: 58px;
+    z-index: 5;
+    margin-bottom: clamp(1rem, 3vh, 1.6rem);
+  }
   .flyers__wall {
     display: block;
   }
   .flyers__cell {
     position: sticky;
-    top: 70px;
+    top: 150px;
     /* conserva su rotación inline (--rot) para el look apilado ladeado */
     width: min(86%, 340px);
     margin: 0 auto clamp(1rem, 4vh, 2rem);

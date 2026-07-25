@@ -11,17 +11,6 @@ const REGIONES = [
   { region: "Sur", ciudades: ["Neuquén Capital", "Bariloche"] },
 ];
 
-// Nota musical (reemplaza al emoji 🎸, prohibido por el brief).
-function NoteIcon({ className = "" }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path d="M9 18V6l11-2v12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-      <circle cx="6.5" cy="18" r="2.6" fill="currentColor" />
-      <circle cx="17.5" cy="16" r="2.6" fill="currentColor" />
-    </svg>
-  );
-}
-
 export default function TourVote({ open, onOpen, onClose }) {
   const [voted, setVoted] = useState(false);
   const [showFloat, setShowFloat] = useState(false);
@@ -89,10 +78,8 @@ export default function TourVote({ open, onOpen, onClose }) {
             {voted ? (
               <div className="tourvote__ok" role="status">
                 <Burst className="tourvote__ok-burst" color="var(--sf-rosa)" points={13} />
-                <p className="tourvote__ok-main titular-b">¡Voto registrado!</p>
-                <p className="tourvote__ok-sub">
-                  Nos vemos en la ruta <NoteIcon className="tourvote__ok-note" />
-                </p>
+                <PlaneIcon className="tourvote__ok-plane" />
+                <p className="tourvote__ok-main">¡Voto registrado!</p>
               </div>
             ) : (
               <>

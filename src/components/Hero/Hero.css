@@ -9,23 +9,24 @@
   align-content: center;
 }
 
-/* === Estallidos-marco a ambos lados === */
+/* === Estallidos-marco: chicos, en los bordes altos (detrás del título,
+   despejando el área de los botones) === */
 .hero__burst {
   position: absolute;
   z-index: var(--z-decor);
-  top: 50%;
-  width: clamp(300px, 42vw, 560px);
-  height: clamp(300px, 42vw, 560px);
+  top: 32%;
+  width: clamp(200px, 34vw, 400px);
+  height: clamp(200px, 34vw, 400px);
   will-change: transform;
 }
 .hero__burst--r {
-  right: clamp(-220px, -16vw, -140px);
+  right: clamp(-210px, -17vw, -150px);
   transform: translateY(-50%) rotate(-8deg)
     translateY(calc(var(--sf-parallax, 0px) * 0.14));
 }
 .hero__burst--l {
-  left: clamp(-240px, -18vw, -160px);
-  transform: translateY(-40%) rotate(12deg)
+  left: clamp(-220px, -18vw, -160px);
+  transform: translateY(-55%) rotate(12deg)
     translateY(calc(var(--sf-parallax, 0px) * -0.1));
 }
 
