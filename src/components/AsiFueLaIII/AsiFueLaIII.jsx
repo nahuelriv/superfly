@@ -14,11 +14,7 @@ export default function AsiFueLaIII() {
 
       <div className="sf-container asifue__inner">
         <h2 id="asifue-title" className="asifue__title">
-          <WildTitle text="Así fue la" className="asifue__title-txt" />
-          <span className="asifue__edicion">
-            <Burst className="asifue__edicion-burst" color="var(--sf-cyan)" points={12} />
-            <WildTitle text={edicionAnterior.edicion} className="asifue__edicion-txt" />
-          </span>
+          <WildTitle text="Reviví la última SuperFly" className="asifue__title-txt" />
         </h2>
 
         <div className="asifue__datos sf-stagger">

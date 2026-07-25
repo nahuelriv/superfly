@@ -241,13 +241,13 @@
 @media (max-width: 559px) {
   .fotos {
     overflow: visible; /* sticky no funciona con ancestro overflow:hidden */
-    padding-bottom: clamp(3rem, 14vh, 7rem); /* aire para que la última se asiente */
+    padding-bottom: clamp(1rem, 4vh, 2rem);
   }
-  /* Título fijo arriba mientras las fotos se apilan debajo */
+  /* Título fijo arriba mientras se apilan, sin fondo. */
   .fotos__head {
     position: sticky;
-    top: 58px;
-    z-index: 5;
+    top: 54px; /* debajo de la navbar */
+    z-index: 6; /* por encima de las fotos */
     margin-bottom: clamp(1rem, 3vh, 1.6rem);
   }
   .fotos__grid {
@@ -255,10 +255,15 @@
   }
   .fotos__cell {
     position: sticky;
-    top: 150px;
+    top: 118px; /* siempre debajo del título: nunca se superponen */
     /* mantiene su rotación inline (--rot) para el look apilado ladeado */
     width: min(86%, 340px);
     margin: 0 auto clamp(1rem, 4vh, 2rem);
+  }
+  /* Al terminar la sección, título y pila suben juntos (empujados por la
+     siguiente sección), manteniendo siempre el hueco entre ellos. */
+  .fotos__cell:last-child {
+    margin-bottom: 0;
   }
   /* Tamaño uniforme: todas 4/5, así la de arriba tapa por completo a la anterior */
   .fotos__cell .fotos__img,

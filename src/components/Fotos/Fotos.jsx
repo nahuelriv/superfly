@@ -36,6 +36,49 @@ export default function Fotos() {
   const open = activa !== null;
   const fotoActiva = open ? fotosIII[activa] : null;
 
+  // Render de una tarjeta (usa el índice real de fotosIII para el lightbox).
+  const renderCell = (foto, i) => {
+    const mostrarImg = foto.src && !fallidas.has(i);
+    return (
+      <li
+        key={i}
+        className={`fotos__cell ${foto.destacada ? "fotos__cell--big" : ""} ${foto.frio ? "fotos__cell--frio" : ""}`}
+        style={{ "--rot": `${ROT[i % ROT.length]}deg`, "--ratio": foto.ratio }}
+      >
+        {i === 0 && (
+          <Burst className="fotos__burst" color="var(--sf-rosa)" points={13} />
+        )}
+        {mostrarImg ? (
+          <button
+            type="button"
+            className="fotos__btn"
+            onClick={() => abrir(i)}
+            aria-label={`Ampliar foto: ${foto.alt}`}
+          >
+            <img
+              className="fotos__img"
+              src={foto.src}
+              alt={foto.alt}
+              loading="lazy"
+              decoding="async"
+              onError={() =>
+                setFallidas((prev) => {
+                  const next = new Set(prev);
+                  next.add(i);
+                  return next;
+                })
+              }
+            />
+          </button>
+        ) : (
+          <div className="fotos__ph" role="img" aria-label={`${foto.alt} (foto pendiente)`}>
+            <span className="fotos__ph-txt">falta la foto</span>
+          </div>
+        )}
+      </li>
+    );
+  };
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => {
@@ -62,47 +105,7 @@ export default function Fotos() {
         </header>
 
         <ul className="fotos__grid sf-stagger">
-          {fotosIII.map((foto, i) => {
-            const mostrarImg = foto.src && !fallidas.has(i);
-            return (
-              <li
-                key={i}
-                className={`fotos__cell ${foto.destacada ? "fotos__cell--big" : ""} ${foto.frio ? "fotos__cell--frio" : ""}`}
-                style={{ "--rot": `${ROT[i % ROT.length]}deg`, "--ratio": foto.ratio }}
-              >
-                {i === 0 && (
-                  <Burst className="fotos__burst" color="var(--sf-rosa)" points={13} />
-                )}
-                {mostrarImg ? (
-                  <button
-                    type="button"
-                    className="fotos__btn"
-                    onClick={() => abrir(i)}
-                    aria-label={`Ampliar foto: ${foto.alt}`}
-                  >
-                    <img
-                      className="fotos__img"
-                      src={foto.src}
-                      alt={foto.alt}
-                      loading="lazy"
-                      decoding="async"
-                      onError={() =>
-                        setFallidas((prev) => {
-                          const next = new Set(prev);
-                          next.add(i);
-                          return next;
-                        })
-                      }
-                    />
-                  </button>
-                ) : (
-                  <div className="fotos__ph" role="img" aria-label={`${foto.alt} (foto pendiente)`}>
-                    <span className="fotos__ph-txt">falta la foto</span>
-                  </div>
-                )}
-              </li>
-            );
-          })}
+          {fotosIII.map((foto, i) => renderCell(foto, i))}
         </ul>
       </div>
 

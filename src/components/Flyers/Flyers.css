@@ -82,13 +82,13 @@
 @media (max-width: 559px) {
   .flyers {
     overflow: visible;
-    padding-bottom: clamp(3rem, 14vh, 7rem);
+    padding-bottom: clamp(1rem, 4vh, 2rem);
   }
-  /* Título fijo arriba mientras los flyers se apilan debajo */
+  /* Título fijo arriba mientras se apilan, sin fondo. */
   .flyers__head {
     position: sticky;
-    top: 58px;
-    z-index: 5;
+    top: 54px;
+    z-index: 6;
     margin-bottom: clamp(1rem, 3vh, 1.6rem);
   }
   .flyers__wall {
@@ -96,10 +96,13 @@
   }
   .flyers__cell {
     position: sticky;
-    top: 150px;
+    top: 118px; /* siempre debajo del título: nunca se superponen */
     /* conserva su rotación inline (--rot) para el look apilado ladeado */
     width: min(86%, 340px);
     margin: 0 auto clamp(1rem, 4vh, 2rem);
+  }
+  .flyers__cell:last-child {
+    margin-bottom: 0;
   }
 }
 
