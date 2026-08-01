@@ -21,6 +21,7 @@ export const proximo = {
 export const edicionAnterior = {
   edicion: "III",
   fechaLarga: "Sábado 21 de marzo",
+  fechaISO: "2026-03-21T00:00:00-03:00", // para el contador de días
   ubicacion: "Av. Corrientes 6271, C.A.B.A.",
   mapsUrl: "https://maps.google.com/?q=Av.+Corrientes+6271,+CABA",
   resumen:

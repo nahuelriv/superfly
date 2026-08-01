@@ -2,11 +2,15 @@ import NavbarMin from "./components/NavbarMin/NavbarMin";
 import Hero from "./components/Hero/Hero";
 import AsiFueLaIII from "./components/AsiFueLaIII/AsiFueLaIII";
 import Fotos from "./components/Fotos/Fotos";
+import Canon from "./components/Canon/Canon";
 import Flyers from "./components/Flyers/Flyers";
+import Contador from "./components/Contador/Contador";
 import NotifyForm from "./components/NotifyForm/NotifyForm";
 import Countdown from "./components/Countdown/Countdown";
 import Footer from "./components/Footer/Footer";
 import TourVote from "./components/TourVote/TourVote";
+import Vinilo from "./components/Vinilo/Vinilo";
+import Konami from "./components/Konami/Konami";
 import { useReveal } from "./hooks/useReveal";
 import { useState } from "react";
 import "./App.css";
@@ -36,8 +40,10 @@ export default function App() {
       <main id="main" tabIndex="-1">
         <Hero onVote={() => setVoteOpen(true)} />
 
+        <Reveal><Contador /></Reveal>
         <Reveal><AsiFueLaIII /></Reveal>
         <Reveal><Fotos /></Reveal>
+        <Reveal><Canon /></Reveal>
         <Reveal><Flyers /></Reveal>
         <Countdown />
         <Reveal><NotifyForm /></Reveal>
@@ -50,6 +56,9 @@ export default function App() {
         onOpen={() => setVoteOpen(true)}
         onClose={() => setVoteOpen(false)}
       />
+
+      <Vinilo />
+      <Konami />
     </>
   );
 }

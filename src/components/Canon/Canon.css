@@ -1,0 +1,110 @@
+.canon {
+  position: relative;
+  background: var(--sf-amarillo);
+  padding-block: clamp(2.5rem, 8vw, 4.5rem);
+  overflow: hidden;
+}
+
+.canon__inner {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 0.2rem;
+}
+
+.canon__hora {
+  font-family: var(--font-display);
+  color: var(--sf-navy);
+  font-size: clamp(1.4rem, 7vw, 2.6rem);
+  line-height: 1;
+  margin: 0;
+}
+
+.canon__title {
+  margin: 0 0 clamp(1rem, 4vw, 1.8rem);
+  font-size: var(--fs-h2);
+  line-height: 0.9;
+}
+
+.canon__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 2rem);
+}
+
+.canon__burst {
+  position: absolute;
+  z-index: var(--z-decor);
+  width: clamp(240px, 66vw, 420px);
+  height: clamp(240px, 66vw, 420px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-6deg);
+  opacity: 0.9;
+}
+
+/* El cañón es un botón: se ve tocable (cursor + feedback de presión) */
+.canon__btn {
+  position: relative;
+  z-index: var(--z-content);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-pop);
+}
+.canon__btn:hover {
+  transform: scale(1.04) rotate(-2deg);
+}
+.canon__btn:active {
+  transform: scale(0.95) rotate(-3deg);
+}
+.canon__btn:focus-visible {
+  outline: 3px solid var(--sf-navy);
+  outline-offset: 4px;
+}
+
+.canon__svg {
+  display: block;
+  width: clamp(160px, 52vw, 260px);
+  height: auto;
+  filter: drop-shadow(4px 4px 0 var(--sf-navy));
+}
+
+/* Hint corto, con estética de label */
+.canon__hint {
+  position: relative;
+  z-index: var(--z-content);
+  margin: clamp(0.8rem, 3vw, 1.4rem) 0 0;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: clamp(0.85rem, 3.4vw, 1.1rem);
+  color: var(--sf-navy);
+  background: var(--sf-blanco);
+  border: var(--line-thin);
+  box-shadow: 4px 4px 0 var(--sf-rosa);
+  padding: 0.4rem 0.9rem;
+}
+
+/* Remeras voladoras: capa fija al viewport, no intercepta taps */
+.canon__fx {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  pointer-events: none;
+}
+
+.canon__shirt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(40px, 11vw, 62px);
+  will-change: transform;
+}
+.canon__shirt svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(2px 2px 0 var(--sf-navy));
+}

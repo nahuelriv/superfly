@@ -1,0 +1,55 @@
+.contador {
+  background: var(--sf-amarillo);
+  padding-block: clamp(2rem, 6vw, 3.5rem);
+  overflow: hidden;
+}
+
+/* Franja rectangular rosa, de ancho completo, con bordes navy arriba y abajo */
+.contador__banda {
+  position: relative;
+  background: var(--sf-rosa);
+  border-block: var(--line);
+  padding-block: clamp(1.6rem, 6vw, 3rem);
+}
+
+.contador__inner {
+  position: relative;
+  z-index: var(--z-content);
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 0.1rem;
+}
+
+.contador__pre {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--sf-navy);
+  font-size: clamp(1.1rem, 5vw, 1.9rem);
+  margin: 0;
+}
+
+/* El número: protagonista, enorme, tratamiento de titular sobre la franja */
+.contador__num {
+  margin: 0;
+  font-size: clamp(4rem, 26vw, 11rem);
+  line-height: 0.82;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 6px 6px 0 var(--sf-navy);
+}
+
+.contador__post {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--sf-navy);
+  font-size: clamp(1rem, 4.5vw, 1.6rem);
+  line-height: 1.05;
+  max-width: 18ch;
+  margin: 0.3rem 0 0;
+}
+
+.contador__star { position: absolute; z-index: var(--z-decor); }
+.contador__star--1 { width: 28px; height: 28px; top: 12%; left: 7%; }
+.contador__star--2 { width: 22px; height: 22px; bottom: 14%; right: 8%; }
