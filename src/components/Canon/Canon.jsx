@@ -150,19 +150,32 @@ export default function Canon() {
             onClick={disparar}
             aria-label="Disparar remeras del cañón"
           >
-            <svg className="canon__svg" viewBox="0 0 130 100" aria-hidden="true" focusable="false">
-              <g transform="rotate(-32 40 68)">
-                <rect x="38" y="55" width="74" height="22" rx="4" fill="var(--sf-cyan)" stroke="var(--sf-navy)" strokeWidth="4" />
-                <ellipse cx="112" cy="66" rx="5" ry="12" fill="var(--sf-navy)" />
+            <svg className="canon__svg" viewBox="0 0 180 125" aria-hidden="true" focusable="false">
+              {/* Lanzador de remeras (bazooka): tubo + tanque + empuñadura + boca */}
+              <g transform="rotate(-13 66 74)">
+                {/* tanque de presión (abajo/atrás) */}
+                <rect x="30" y="62" width="70" height="26" rx="13" fill="var(--sf-naranja)" stroke="var(--sf-navy)" strokeWidth="4" />
+                <circle cx="30" cy="75" r="6" fill="var(--sf-naranja)" stroke="var(--sf-navy)" strokeWidth="4" />
+                {/* conexión tanque - barril */}
+                <rect x="60" y="58" width="12" height="12" fill="var(--sf-navy)" />
+
+                {/* empuñadura + gatillo */}
+                <path d="M58 60 L76 60 L71 96 L61 96 Z" fill="var(--sf-navy)" />
+                <path d="M62 66 q-9 7 -2 16" fill="none" stroke="var(--sf-navy)" strokeWidth="4" strokeLinecap="round" />
+
+                {/* barril / tubo */}
+                <rect x="48" y="36" width="74" height="28" rx="14" fill="var(--sf-cyan)" stroke="var(--sf-navy)" strokeWidth="4" />
+                {/* banda */}
+                <rect x="104" y="34" width="6" height="32" fill="var(--sf-navy)" />
+                {/* boca acampanada */}
+                <polygon points="118,32 148,24 148,76 118,68" fill="var(--sf-cyan)" stroke="var(--sf-navy)" strokeWidth="4" strokeLinejoin="round" />
+                {/* labio rosa */}
+                <rect x="144" y="22" width="9" height="56" rx="4" fill="var(--sf-rosa)" stroke="var(--sf-navy)" strokeWidth="4" />
+                {/* remera asomando de la boca */}
+                <rect x="151" y="36" width="16" height="28" rx="8" fill="var(--sf-blanco)" stroke="var(--sf-navy)" strokeWidth="3" />
+                {/* brillo plano en el tubo */}
+                <path d="M56 45 L112 39" stroke="rgba(255,255,255,0.55)" strokeWidth="3" strokeLinecap="round" />
               </g>
-              <circle cx="34" cy="78" r="19" fill="var(--sf-naranja)" stroke="var(--sf-navy)" strokeWidth="4" />
-              <g stroke="var(--sf-navy)" strokeWidth="3" strokeLinecap="round">
-                <line x1="34" y1="61" x2="34" y2="95" />
-                <line x1="17" y1="78" x2="51" y2="78" />
-                <line x1="22" y1="66" x2="46" y2="90" />
-                <line x1="46" y1="66" x2="22" y2="90" />
-              </g>
-              <circle cx="34" cy="78" r="5" fill="var(--sf-navy)" />
             </svg>
           </button>
         </div>

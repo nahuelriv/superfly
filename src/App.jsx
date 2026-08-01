@@ -10,7 +10,7 @@ import Countdown from "./components/Countdown/Countdown";
 import Footer from "./components/Footer/Footer";
 import TourVote from "./components/TourVote/TourVote";
 import Vinilo from "./components/Vinilo/Vinilo";
-import Konami from "./components/Konami/Konami";
+import Intro from "./components/Intro/Intro";
 import { useReveal } from "./hooks/useReveal";
 import { useState } from "react";
 import "./App.css";
@@ -33,6 +33,8 @@ export default function App() {
 
   return (
     <>
+      <Intro />
+
       <a href="#main" className="sf-skip">Saltar al contenido</a>
 
       <NavbarMin />
@@ -58,7 +60,6 @@ export default function App() {
       />
 
       <Vinilo />
-      <Konami />
     </>
   );
 }

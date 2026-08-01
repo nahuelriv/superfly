@@ -41,17 +41,32 @@
   text-align: center;
 }
 
-/* Entrada escalonada al cargar (estampada, corta — §9). */
+/* Entrada escalonada, disparada cuando la página está lista (is-ready): al
+   cargar directo, o cuando la intro sube la cortina. Antes, ocultas. */
 .hero__logo,
 .hero__aviso,
 .hero__tagline,
 .hero__ctas {
-  animation: sf-stamp-plain 300ms var(--ease-out) both;
+  opacity: 0;
 }
-.hero__logo  { animation-delay: 80ms; }
-.hero__aviso { animation-delay: 200ms; }
-.hero__tagline { animation-delay: 320ms; }
-.hero__ctas  { animation-delay: 420ms; }
+:root.is-ready .hero__logo,
+:root.is-ready .hero__aviso,
+:root.is-ready .hero__tagline,
+:root.is-ready .hero__ctas {
+  animation: hero-pop 560ms var(--ease-pop) both;
+}
+:root.is-ready .hero__logo    { animation-delay: 60ms; }
+:root.is-ready .hero__aviso   { animation-delay: 220ms; }
+:root.is-ready .hero__tagline { animation-delay: 380ms; }
+:root.is-ready .hero__ctas    { animation-delay: 500ms; }
+
+/* Entrada exagerada: entra chica desde abajo, se pasa de tamaño y asienta */
+@keyframes hero-pop {
+  0%   { opacity: 0; transform: translateY(48px) scale(0.5); }
+  55%  { opacity: 1; transform: translateY(-14px) scale(1.12); }
+  75%  { transform: translateY(3px) scale(0.98); }
+  100% { opacity: 1; transform: none; }
+}
 
 @keyframes sf-stamp-plain {
   0%   { opacity: 0; transform: translateY(18px) scale(0.9); }

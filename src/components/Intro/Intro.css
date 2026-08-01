@@ -1,0 +1,104 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 2000; /* sobre todo (navbar, modal, FAB, vinilo) */
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  /* Fondo navy (pantalla de arcade): se distingue claramente de la página amarilla */
+  background: var(--sf-navy);
+  animation: intro-in 200ms var(--ease-out) both;
+}
+
+.intro__arcade {
+  display: grid;
+  justify-items: center;
+  gap: clamp(1.2rem, 5vw, 2rem);
+  width: min(92%, 460px);
+  padding: 1rem;
+}
+
+/* HUD superior tipo arcade */
+.intro__hud {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-family: var(--font-body);
+  font-weight: 800;
+}
+.intro__hud-col {
+  display: grid;
+  gap: 0.25rem;
+  text-align: left;
+}
+.intro__hud-col--r { text-align: right; justify-items: end; }
+.intro__hud-label {
+  font-size: clamp(0.7rem, 3vw, 0.9rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sf-cyan);
+}
+.intro__score {
+  font-size: clamp(0.95rem, 4vw, 1.25rem);
+  letter-spacing: 0.14em;
+  color: var(--sf-amarillo);
+  font-variant-numeric: tabular-nums;
+}
+
+.intro__logo {
+  width: clamp(210px, 60vw, 440px);
+  height: auto;
+  animation: intro-logo 500ms var(--ease-pop) both;
+}
+
+.intro__coin {
+  margin: 0;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: clamp(1.2rem, 5.5vw, 2rem);
+  color: var(--sf-amarillo);
+  animation: intro-blink 0.6s steps(1, end) infinite;
+}
+.intro__arrow { color: var(--sf-rosa); }
+
+.intro__credit {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: clamp(0.7rem, 3vw, 0.9rem);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.intro__star { position: absolute; z-index: 1; }
+.intro__star--1 { width: 30px; height: 30px; top: 16%; left: 12%; }
+.intro__star--2 { width: 24px; height: 24px; bottom: 18%; right: 14%; }
+
+/* Salida: la "cortina" navy sube y revela la página amarilla (reveal claro) */
+.intro--out {
+  animation: intro-out 460ms var(--ease-in-out) forwards;
+}
+
+@keyframes intro-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes intro-logo {
+  0% { opacity: 0; transform: translateY(10px) scale(0.8); }
+  60% { opacity: 1; transform: translateY(-3px) scale(1.03); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes intro-blink {
+  50% { opacity: 0; }
+}
+@keyframes intro-out {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
+}
+
+/* Seguridad extra: si se montara con reduced-motion, no se muestra ni bloquea */
+@media (prefers-reduced-motion: reduce) {
+  .intro { display: none; }
+}
