@@ -20,21 +20,20 @@
   z-index: 0; /* contexto propio para que el eco no caiga tras el fondo */
   display: inline-block;
   color: var(--sf-navy);
-  -webkit-text-stroke: 2px var(--sf-blanco);
+  -webkit-text-stroke: 0.028em var(--sf-blanco);
   paint-order: stroke fill;
   transform: rotate(var(--rot, 0deg)) translateY(calc(var(--dy, 0) * 1em));
 }
 
-/* Eco de contorno rosa hueco por letra */
+/* Sombra rosa rellena (offset sólido sin blur, como los flyers) */
 .wild__l::before {
   content: attr(data-ch);
   position: absolute;
   left: 0;
   top: 0;
   z-index: -1;
-  color: transparent;
-  -webkit-text-stroke: 3px var(--sf-rosa);
-  paint-order: stroke;
-  transform: translate(0.05em, 0.06em);
+  color: var(--sf-rosa);
+  -webkit-text-stroke: 0;
+  transform: translate(0.06em, 0.075em);
   pointer-events: none;
 }

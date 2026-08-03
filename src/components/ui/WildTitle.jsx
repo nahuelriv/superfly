@@ -6,7 +6,7 @@ import "./WildTitle.css";
 // juntas (sin cortar) y separadas por un espacio.
 // Letras derechas: rotación casi nula + salto vertical (em) apenas perceptible.
 const ROT = [-0.5, 0.5, -0.6, 0.4, -0.5, 0.6, -0.4, 0.5, -0.6, 0.4, -0.5, 0.5, -0.4, 0.6];
-const DY = [0.05, -0.05, 0.03, -0.06, 0.05, -0.04, 0.06, -0.05, 0.04, -0.05, 0.05, -0.04, 0.06, -0.05];
+const DY = [0.02, -0.02, 0.015, -0.025, 0.02, -0.015, 0.025, -0.02, 0.015, -0.02, 0.02, -0.015, 0.025, -0.02];
 
 export default function WildTitle({ text, className = "", id }) {
   const words = String(text).split(" ");

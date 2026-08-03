@@ -45,20 +45,17 @@
    cargar directo, o cuando la intro sube la cortina. Antes, ocultas. */
 .hero__logo,
 .hero__aviso,
-.hero__tagline,
 .hero__ctas {
   opacity: 0;
 }
 :root.is-ready .hero__logo,
 :root.is-ready .hero__aviso,
-:root.is-ready .hero__tagline,
 :root.is-ready .hero__ctas {
   animation: hero-pop 560ms var(--ease-pop) both;
 }
-:root.is-ready .hero__logo    { animation-delay: 60ms; }
-:root.is-ready .hero__aviso   { animation-delay: 220ms; }
-:root.is-ready .hero__tagline { animation-delay: 380ms; }
-:root.is-ready .hero__ctas    { animation-delay: 500ms; }
+:root.is-ready .hero__logo  { animation-delay: 60ms; }
+:root.is-ready .hero__aviso { animation-delay: 260ms; }
+:root.is-ready .hero__ctas  { animation-delay: 460ms; }
 
 /* Entrada exagerada: entra chica desde abajo, se pasa de tamaño y asienta */
 @keyframes hero-pop {
@@ -89,38 +86,10 @@
   line-height: 0.78;
 }
 
-/* Cada renglón es un flex de palabras; se permiten desalineadas a propósito */
-.hero__aviso-line {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 0.05em 0.22em;
-}
-.hero__aviso-line--2 {
-  margin-top: -0.06em;
-}
-
-/* Tamaño por palabra; las letras van derechas con salto vertical (WildTitle) */
-.hero__word--a0 { /* SE */    font-size: clamp(2rem, 10vw, 4rem); }
-.hero__word--a1 { /* VIENE */ font-size: clamp(2.7rem, 13.5vw, 6rem); }
-.hero__word--b0 { /* ALGO */  font-size: clamp(1.5rem, 7vw, 3rem); }
-.hero__word--b1 { /* ENORME */font-size: clamp(2.4rem, 11.5vw, 5rem); }
-
-/* Tagline como sticker de flyer: caja blanca, borde navy, sombra dura, ladeada */
-.hero__tagline {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  color: var(--sf-navy);
-  font-size: clamp(0.9rem, 3.6vw, 1.25rem);
-  line-height: 1;
-  margin: clamp(1rem, 3vw, 1.6rem) 0 0;
-  background: var(--sf-blanco);
-  border: var(--line);
-  box-shadow: var(--shadow-hard-rosa);
-  padding: 0.5rem 0.9rem;
-  transform: rotate(-2deg);
+/* Mismo estilo que el título de "Reviví la última SuperFly" (WildTitle uniforme) */
+.hero__aviso-txt {
+  font-size: clamp(2.6rem, 13vw, 5.5rem);
+  line-height: 0.85;
 }
 
 /* === CTAs (entradas arriba, votación debajo; centrados) === */
@@ -177,7 +146,6 @@
 @media (prefers-reduced-motion: reduce) {
   .hero__logo,
   .hero__aviso,
-  .hero__tagline,
   .hero__ctas { animation: none; }
   .hero__scroll-arrow { animation: none; }
 }

@@ -43,19 +43,8 @@ export default function Hero({ onVote }) {
         </h1>
 
         <p className="hero__aviso">
-          <span className="hero__aviso-line hero__aviso-line--1">
-            {proximo.aviso.split(" ").map((w, i) => (
-              <WildTitle key={i} text={w} className={`hero__word hero__word--a${i}`} />
-            ))}
-          </span>
-          <span className="hero__aviso-line hero__aviso-line--2">
-            {proximo.avisoBajada.split(" ").map((w, i) => (
-              <WildTitle key={i} text={w} className={`hero__word hero__word--b${i}`} />
-            ))}
-          </span>
+          <WildTitle text="El mejor festival del mundo" className="hero__aviso-txt" />
         </p>
-
-        <p className="hero__tagline">{proximo.tagline}</p>
 
         <div className="hero__ctas">
           <TicketButton className="hero__cta-primary" />
