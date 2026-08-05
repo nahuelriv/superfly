@@ -4,7 +4,7 @@ import { proximo } from "../../data/festival";
 import "./NavbarMin.css";
 
 export default function NavbarMin() {
-  const { direction, atTop } = useScrollDirection(10);
+  const { atTop } = useScrollDirection(10);
   const [pastHero, setPastHero] = useState(false);
 
   // El logo del header aparece recién cuando el hero sale de vista.
@@ -19,13 +19,10 @@ export default function NavbarMin() {
     return () => obs.disconnect();
   }, []);
 
-  const hidden = direction === "down" && !atTop;
-
   return (
     <header
       className={[
         "navmin",
-        hidden ? "navmin--hidden" : "",
         atTop ? "navmin--top" : "navmin--solid",
       ].join(" ")}
     >

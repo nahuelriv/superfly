@@ -25,11 +25,6 @@
   border-bottom: 3px solid var(--sf-navy);
 }
 
-/* Hide-on-scroll: se oculta hacia arriba, sin display:none */
-.navmin--hidden {
-  transform: translateY(-100%);
-}
-
 /* Logo: oculto hasta pasar el hero, entra con fade + slide desde arriba */
 .navmin__brand {
   display: inline-flex;
