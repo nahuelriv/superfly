@@ -56,12 +56,20 @@
   min-height: var(--tap-min);
   color: var(--sf-navy);
   background: var(--sf-blanco);
-  border: var(--line-thin);
-  box-shadow: 4px 4px 0 var(--sf-rosa);
+  /* Mismo lenguaje que los CTAs: borde navy grueso + sombra dura offset rosa */
+  border: var(--line);
+  border-radius: 0;
+  box-shadow: var(--shadow-hard-rosa);
   transition: transform var(--dur-fast) var(--sf-ease),
     box-shadow var(--dur-fast) var(--sf-ease);
   /* Cierra la secuencia del hero con un fade suave. */
   opacity: 0;
+}
+
+/* Foco de teclado visible (a11y / §10) */
+.navmin__ig:focus-visible {
+  outline: 3px solid var(--sf-navy);
+  outline-offset: 3px;
 }
 :root.is-ready .navmin__ig {
   animation: navmin-ig-in 500ms var(--ease-out) 850ms both;
@@ -70,7 +78,7 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
-.navmin__ig svg { width: 20px; height: 20px; }
+.navmin__ig svg { width: 24px; height: 24px; }
 
 .navmin__ig:hover,
 .navmin__ig:focus-visible {

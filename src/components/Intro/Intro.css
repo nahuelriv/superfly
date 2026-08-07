@@ -10,12 +10,33 @@
   animation: intro-in 200ms var(--ease-out) both;
 }
 
+/* A pantalla completa el radio del CRT dejaría asomar la página en las
+   esquinas: lo anulo (la curvatura queda por el inset shadow de .crt-screen). */
+.intro.crt-screen {
+  border-radius: 0;
+}
+
 .intro__arcade {
   display: grid;
   justify-items: center;
   gap: clamp(1.2rem, 5vw, 2rem);
   width: min(92%, 460px);
   padding: 1rem;
+}
+
+/* Aberración cromática CRT: desfase rojo/cyan mínimo y estático (no molesta la
+   lectura ni cuesta performance). El "Insert coin" queda aparte, sin tocar. */
+.intro__logo {
+  filter:
+    drop-shadow(1.2px 0 0 rgba(255, 0, 70, 0.6))
+    drop-shadow(-1.2px 0 0 rgba(0, 190, 255, 0.6));
+}
+.intro__hud-label,
+.intro__score,
+.intro__credit {
+  text-shadow:
+    1.1px 0 0 rgba(255, 0, 70, 0.65),
+    -1.1px 0 0 rgba(0, 190, 255, 0.65);
 }
 
 /* HUD superior tipo arcade */

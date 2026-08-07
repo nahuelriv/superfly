@@ -12,8 +12,9 @@
   color: var(--sf-blanco);
   background: var(--sf-navy);
   border: var(--line);
+  border-radius: 0;
   box-shadow: var(--shadow-hard-rosa);
-  padding: 0.7rem 1.2rem;
+  padding: 0.8rem 1.2rem;
   cursor: pointer;
   animation: tourvote-pulse 1.5s ease-in-out infinite;
   transition: transform 150ms var(--sf-ease), box-shadow 150ms var(--sf-ease);
@@ -38,9 +39,23 @@
   box-shadow: 0 0 0 var(--sf-rosa);
 }
 
+/* Foco de teclado visible (a11y / §10) */
+.tourvote-cta:focus-visible {
+  outline: 3px solid var(--sf-navy);
+  outline-offset: 4px;
+}
+
 @keyframes tourvote-pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
+}
+
+/* Sin pulse ni transiciones si se pide menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .tourvote-cta {
+    animation: none;
+    transition: none;
+  }
 }
 
 /* ===== Botón flotante ===== */

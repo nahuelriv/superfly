@@ -6,8 +6,8 @@
      bordes quedan exactamente en #FFBF01, así no se nota costura con el nav
      (cuando se vuelve sólido) ni con la sección de abajo. */
   background: radial-gradient(ellipse 92% 78% at 50% 45%,
-      #ffd84c 0%,
-      #ffcb2e 32%,
+      #ffd03c 0%,
+      #ffc622 32%,
       var(--sf-amarillo) 64%);
   padding: clamp(1.5rem, 5vw, 3rem) var(--container-pad) clamp(3.5rem, 8vw, 5rem);
   overflow: hidden;
@@ -120,9 +120,18 @@
 .hero__ctas {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: clamp(0.9rem, 3vw, 1.3rem);
   margin-top: clamp(1.4rem, 4vw, 2.2rem);
+  width: min(100%, 22rem);
+  margin-inline: auto;
+}
+
+/* Ambos CTAs al mismo ancho para que la columna quede prolija */
+.hero__ctas .ticketbtn-wrap,
+.hero__ctas .ticketbtn,
+.hero__ctas .tourvote-cta {
+  width: 100%;
 }
 
 /* === Decoración repartida (lejos del texto centrado) === */

@@ -66,7 +66,7 @@ export default function Intro() {
   if (!visible) return null;
 
   return (
-    <div className={`intro ${cerrando ? "intro--out" : ""}`} aria-hidden="true">
+    <div className={`intro crt-screen ${cerrando ? "intro--out" : ""}`} aria-hidden="true">
       <Star className="intro__star intro__star--1" color="var(--sf-cyan)" />
       <Star className="intro__star intro__star--2" color="var(--sf-rosa)" />
 

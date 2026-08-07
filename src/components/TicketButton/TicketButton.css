@@ -1,9 +1,11 @@
 .ticketbtn-wrap {
   display: inline-grid;
   justify-items: center;
-  gap: 0.5rem;
 }
 
+/* Botón comic unificado: navy sólido + sombra dura offset rosa (mismo lenguaje
+   que .tourvote-cta). Como es el CTA primario, va en texto amarillo y más
+   grande para leerse por encima del secundario (que va en blanco). */
 .ticketbtn {
   display: inline-flex;
   align-items: center;
@@ -14,11 +16,12 @@
   text-transform: uppercase;
   letter-spacing: 0.02em;
   font-size: clamp(1.1rem, 5vw, 1.6rem);
-  color: var(--sf-navy);
-  background: var(--sf-rosa);
+  color: var(--sf-amarillo);
+  background: var(--sf-navy);
   border: var(--line);
-  box-shadow: var(--shadow-hard);
-  padding: 0.85rem 1.6rem;
+  border-radius: 0;
+  box-shadow: var(--shadow-hard-rosa);
+  padding: 0.8rem 1.2rem;
   text-align: center;
 }
 
@@ -28,35 +31,33 @@
   flex-shrink: 0;
 }
 
-/* Habilitado: micro-interacción (#12), se presiona hacia la sombra */
+/* Foco de teclado visible (a11y / §10) */
+.ticketbtn:focus-visible {
+  outline: 3px solid var(--sf-navy);
+  outline-offset: 4px;
+}
+
+/* Habilitado: micro-interacción, se presiona hacia la sombra (botón físico) */
 .ticketbtn--on {
   transition: transform 150ms var(--sf-ease), box-shadow 150ms var(--sf-ease);
 }
-
 .ticketbtn--on:hover,
 .ticketbtn--on:focus-visible {
   transform: translate(3px, 3px);
-  box-shadow: 3px 3px 0 var(--sf-navy);
+  box-shadow: 3px 3px 0 var(--sf-rosa);
 }
-
 .ticketbtn--on:active {
   transform: translate(6px, 6px);
-  box-shadow: 0 0 0 var(--sf-navy);
+  box-shadow: 0 0 0 var(--sf-rosa);
 }
 
-/* Deshabilitado: "ghost" opaco (amarillo + contorno navy), plano, no clickeable.
-   Sin transparencia (no se ensucia con lo que haya detrás). */
+/* Bloqueado: mismo lenguaje (navy + sombra rosa) pero NO interactivo. El candado
+   + copy "Próximamente" + cursor not-allowed + aria-disabled comunican el estado
+   sin bajar opacidad (evita transparencias sucias, §4). Sin hover/press. */
 .ticketbtn--off {
-  background: var(--sf-amarillo);
-  color: var(--sf-navy);
-  box-shadow: none;
   cursor: not-allowed;
 }
 
-.ticketbtn__soon {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: var(--fs-label);
-  color: var(--sf-navy);
+@media (prefers-reduced-motion: reduce) {
+  .ticketbtn--on { transition: none; }
 }

@@ -17,21 +17,18 @@ export default function TicketButton({ className = "" }) {
           Comprar entradas
         </a>
       ) : (
-        <>
-          <button
-            type="button"
-            className="ticketbtn ticketbtn--off"
-            disabled
-            aria-disabled="true"
-          >
-            <svg className="ticketbtn__lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-              <rect x="4" y="10.5" width="16" height="9.5" rx="1.5" />
-              <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
-            </svg>
-            Comprar entradas
-          </button>
-          <span className="ticketbtn__soon">Próximamente</span>
-        </>
+        <button
+          type="button"
+          className="ticketbtn ticketbtn--off"
+          disabled
+          aria-disabled="true"
+        >
+          <svg className="ticketbtn__lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+            <rect x="4" y="10.5" width="16" height="9.5" rx="1.5" />
+            <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+          </svg>
+          Próximamente
+        </button>
       )}
     </span>
   );

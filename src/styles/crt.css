@@ -1,0 +1,72 @@
+/* === Efecto CRT reutilizable (.crt-screen) ===
+   Monitor arcade viejo hecho con CSS puro: scanlines, screen-door RGB, viñeta,
+   curvatura simulada (inset shadow + radio) y flicker eléctrico sutil. Sin
+   canvas ni librerías. El contenedor debe tener position propia
+   (relative/fixed/absolute) para anclar los overlays, que son decorativos
+   (pointer-events:none). Usa la paleta (navy oscuro, nunca negro puro ni verde
+   fósforo). La aberración cromática se aplica al contenido en cada pantalla. */
+
+.crt-screen {
+  isolation: isolate;
+  /* Curvatura del tubo: esquinas apenas redondeadas + oscurecido interno hacia
+     los bordes (hace también de viñeta base). */
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 220px 90px rgba(0, 6, 20, 0.92),
+    inset 0 0 80px rgba(0, 6, 20, 1);
+}
+
+/* Scanlines (líneas horizontales) + screen-door RGB + viñeta radial. Estático,
+   costo 0 (sin animación). */
+.crt-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse at 50% 50%, transparent 18%, rgba(0, 8, 26, 0.68) 55%, rgba(0, 6, 20, 0.99) 100%),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 12, 38, 0.32) 0,
+      rgba(0, 12, 38, 0.32) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      to right,
+      rgba(255, 0, 0, 0.08),
+      rgba(0, 255, 0, 0.035),
+      rgba(0, 0, 255, 0.08) 3px
+    );
+}
+
+/* Flicker eléctrico: anima SOLO opacity (compositor, barato). Apagado casi todo
+   el ciclo, con dips cortos e irregulares; steps() => saltos discretos, no fade. */
+.crt-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: rgba(190, 215, 255, 0.11);
+  opacity: 0;
+  animation: crt-flicker 4s steps(1, end) infinite;
+}
+
+@keyframes crt-flicker {
+  0%, 9%, 9.7%, 22%, 22.6%, 40%, 40.4%, 58%, 72%, 72.8%, 88%, 88.6%, 100% { opacity: 0; }
+  9.4% { opacity: 0.85; }
+  22.3% { opacity: 0.5; }
+  40.2% { opacity: 0.7; }
+  72.5% { opacity: 0.95; }
+  88.3% { opacity: 0.45; }
+}
+
+/* Sin parpadeo si el usuario pide menos movimiento. */
+@media (prefers-reduced-motion: reduce) {
+  .crt-screen::after {
+    animation: none;
+    opacity: 0;
+  }
+}

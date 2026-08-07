@@ -1,15 +1,56 @@
 .canon {
   position: relative;
   background: var(--sf-amarillo);
-  padding-block: clamp(2.5rem, 8vw, 4.5rem);
   overflow: hidden;
 }
 
+/* El padding vertical va en el inner para que las marquesinas queden a ras de
+   los bordes de la sección (bookend). */
 .canon__inner {
   display: grid;
   justify-items: center;
   text-align: center;
   gap: 0.2rem;
+  padding-block: clamp(2.5rem, 8vw, 4.5rem);
+}
+
+/* === Marquesina bookend: franja rosa con borde navy, texto en loop === */
+.canon__marquee {
+  overflow: hidden;
+  background: var(--sf-rosa);
+  border-block: var(--line);
+}
+.canon__marquee-track {
+  display: flex;
+  width: max-content;
+  animation: canon-marquee 22s linear infinite;
+}
+.canon__marquee--bottom .canon__marquee-track {
+  animation-direction: reverse;
+}
+.canon__marquee-group {
+  display: flex;
+  flex-shrink: 0;
+}
+.canon__marquee-item {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--sf-navy);
+  font-size: clamp(0.9rem, 3.5vw, 1.3rem);
+  padding: 0.35rem 0.7rem;
+  white-space: nowrap;
+}
+/* Separador tipográfico entre ítems */
+.canon__marquee-item::after {
+  content: "·";
+  margin-left: 1.4rem;
+}
+@keyframes canon-marquee {
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .canon__marquee-track { animation: none; }
 }
 
 .canon__hora {
@@ -36,13 +77,21 @@
 .canon__burst {
   position: absolute;
   z-index: var(--z-decor);
-  width: clamp(240px, 66vw, 420px);
-  height: clamp(240px, 66vw, 420px);
+  width: clamp(320px, 92vw, 640px);
+  height: clamp(320px, 92vw, 640px);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-6deg);
-  opacity: 0.9;
+  opacity: 1;
 }
+
+/* Destellos para densidad (bloque más ruidoso de la página, §8) */
+.canon__star {
+  position: absolute;
+  z-index: var(--z-decor);
+}
+.canon__star--1 { width: 34px; height: 34px; top: 4%; left: 8%; transform: rotate(-8deg); }
+.canon__star--2 { width: 28px; height: 28px; bottom: 6%; right: 9%; transform: rotate(10deg); }
 
 /* El cañón es un botón: se ve tocable (cursor + feedback de presión) */
 .canon__btn {
@@ -107,4 +156,42 @@
   width: 100%;
   height: auto;
   filter: drop-shadow(2px 2px 0 var(--sf-navy));
+}
+
+/* === Onomatopeya cómic al disparar (capa fija, no intercepta taps) === */
+.canon__pops {
+  position: fixed;
+  inset: 0;
+  z-index: 46;
+  pointer-events: none;
+}
+.canon__pop {
+  position: absolute;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 8vw, 3.2rem);
+  line-height: 1;
+  /* Titular cómic: relleno navy, contorno blanco, offset rosa sólido */
+  color: var(--sf-navy);
+  -webkit-text-stroke: 0.06em var(--sf-blanco);
+  paint-order: stroke fill;
+  text-shadow: 0.06em 0.07em 0 var(--sf-rosa);
+  animation: canon-pop 650ms var(--ease-pop) forwards;
+}
+@keyframes canon-pop {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.3) rotate(var(--rot, 0deg)); }
+  30%  { opacity: 1; transform: translate(-50%, -50%) scale(1.25) rotate(var(--rot, 0deg)); }
+  55%  { transform: translate(-50%, -50%) scale(1) rotate(var(--rot, 0deg)); }
+  100% { opacity: 0; transform: translate(-50%, -150%) scale(1) rotate(var(--rot, 0deg)); }
+}
+/* reduced-motion: aparece y se va sin salto ni escala */
+@media (prefers-reduced-motion: reduce) {
+  .canon__pop {
+    animation: canon-pop-rm 550ms ease forwards;
+  }
+  @keyframes canon-pop-rm {
+    0%   { opacity: 0; transform: translate(-50%, -50%) rotate(var(--rot, 0deg)); }
+    20%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--rot, 0deg)); }
+  }
 }
