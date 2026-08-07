@@ -11,22 +11,9 @@ import Footer from "./components/Footer/Footer";
 import TourVote from "./components/TourVote/TourVote";
 import Vinilo from "./components/Vinilo/Vinilo";
 import Intro from "./components/Intro/Intro";
-import { useReveal } from "./hooks/useReveal";
+import AnimatedSection from "./components/ui/AnimatedSection";
 import { useState } from "react";
 import "./App.css";
-
-function Reveal({ children, delay = 0, as: Tag = "div" }) {
-  const [ref, revealed] = useReveal();
-  return (
-    <Tag
-      ref={ref}
-      className={`reveal ${revealed ? "reveal--in" : ""}`}
-      style={{ "--reveal-delay": `${delay}ms` }}
-    >
-      {children}
-    </Tag>
-  );
-}
 
 export default function App() {
   const [voteOpen, setVoteOpen] = useState(false);
@@ -42,13 +29,13 @@ export default function App() {
       <main id="main" tabIndex="-1">
         <Hero onVote={() => setVoteOpen(true)} />
 
-        <Reveal><Contador /></Reveal>
-        <Reveal><AsiFueLaIII /></Reveal>
-        <Reveal><Fotos /></Reveal>
-        <Reveal><Canon /></Reveal>
-        <Reveal><Flyers /></Reveal>
+        <AnimatedSection from="up"><Contador /></AnimatedSection>
+        <AnimatedSection from="left"><AsiFueLaIII /></AnimatedSection>
+        <Fotos />
+        <AnimatedSection from="left"><Canon /></AnimatedSection>
+        <Flyers />
         <Countdown />
-        <Reveal><NotifyForm /></Reveal>
+        <AnimatedSection from="up"><NotifyForm /></AnimatedSection>
       </main>
 
       <Footer />

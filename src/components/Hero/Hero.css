@@ -1,7 +1,14 @@
 .hero {
   position: relative;
   min-height: 88vh;
-  background: var(--sf-amarillo);
+  /* Brillo radial muy sutil: solo el centro un poco más luminoso (donde caen
+     logo y texto) y se funde al amarillo de marca (#FFBF01) hacia afuera. Los
+     bordes quedan exactamente en #FFBF01, así no se nota costura con el nav
+     (cuando se vuelve sólido) ni con la sección de abajo. */
+  background: radial-gradient(ellipse 92% 78% at 50% 45%,
+      #ffd84c 0%,
+      #ffcb2e 32%,
+      var(--sf-amarillo) 64%);
   padding: clamp(1.5rem, 5vw, 3rem) var(--container-pad) clamp(3.5rem, 8vw, 5rem);
   overflow: hidden;
   isolation: isolate;
@@ -9,8 +16,9 @@
   align-content: center;
 }
 
-/* === Estallidos-marco: chicos, en los bordes altos (detrás del título,
-   despejando el área de los botones) === */
+/* === Estallidos-marco: chicos, en los bordes altos (detrás del título).
+   La posición va por CSS; el estallido de entrada (scale + rotate) lo maneja
+   framer, así que acá no hay transform. === */
 .hero__burst {
   position: absolute;
   z-index: var(--z-decor);
@@ -19,15 +27,19 @@
   height: clamp(200px, 34vw, 400px);
   will-change: transform;
 }
+
 .hero__burst--r {
   right: clamp(-210px, -17vw, -150px);
-  transform: translateY(-50%) rotate(-8deg)
-    translateY(calc(var(--sf-parallax, 0px) * 0.14));
 }
+
 .hero__burst--l {
   left: clamp(-220px, -18vw, -160px);
-  transform: translateY(-55%) rotate(12deg)
-    translateY(calc(var(--sf-parallax, 0px) * -0.1));
+}
+
+.hero__burst-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* === Contenido centrado === */
@@ -41,55 +53,67 @@
   text-align: center;
 }
 
-/* Entrada escalonada, disparada cuando la página está lista (is-ready): al
-   cargar directo, o cuando la intro sube la cortina. Antes, ocultas. */
-.hero__logo,
-.hero__aviso,
-.hero__ctas {
-  opacity: 0;
-}
-:root.is-ready .hero__logo,
-:root.is-ready .hero__aviso,
-:root.is-ready .hero__ctas {
-  animation: hero-pop 560ms var(--ease-pop) both;
-}
-:root.is-ready .hero__logo  { animation-delay: 60ms; }
-:root.is-ready .hero__aviso { animation-delay: 260ms; }
-:root.is-ready .hero__ctas  { animation-delay: 460ms; }
-
-/* Entrada exagerada: entra chica desde abajo, se pasa de tamaño y asienta */
-@keyframes hero-pop {
-  0%   { opacity: 0; transform: translateY(48px) scale(0.5); }
-  55%  { opacity: 1; transform: translateY(-14px) scale(1.12); }
-  75%  { transform: translateY(3px) scale(0.98); }
-  100% { opacity: 1; transform: none; }
-}
-
-@keyframes sf-stamp-plain {
-  0%   { opacity: 0; transform: translateY(18px) scale(0.9); }
-  60%  { opacity: 1; transform: translateY(-4px) scale(1.02); }
-  100% { opacity: 1; transform: none; }
-}
-
 .hero__logo {
   margin: 0;
 }
+
 .hero__logo img {
   width: clamp(300px, 86vw, 640px);
   height: auto;
 }
 
+/* Titular recortado de revista: jerarquía de tamaños + alineación asimétrica.
+   El ancho del bloque lo define la línea más grande ("FESTIVAL"); las otras se
+   pegan a los bordes de ese ancho. */
 .hero__aviso {
-  display: grid;
-  justify-items: center;
-  margin: clamp(0.8rem, 3vw, 1.6rem) 0 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  margin: clamp(2.4rem, 6.5vw, 3.6rem) auto 0;
   line-height: 0.78;
 }
 
-/* Mismo estilo que el título de "Reviví la última SuperFly" (WildTitle uniforme) */
-.hero__aviso-txt {
-  font-size: clamp(2.6rem, 13vw, 5.5rem);
-  line-height: 0.85;
+/* Trama halftone (ben-day) detrás del título: puntos navy de impresión que se
+   desvanecen en los bordes (máscara alpha) para fundirse con el amarillo. */
+.hero__aviso::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -34px -52px;
+  background-image: radial-gradient(var(--sf-navy) 1.6px, transparent 1.9px);
+  background-size: 11px 11px;
+  opacity: 0.18;
+  transform: rotate(-1.5deg);
+  -webkit-mask-image: radial-gradient(ellipse 72% 68% at 50% 48%, #000 36%, transparent 80%);
+  mask-image: radial-gradient(ellipse 72% 68% at 50% 48%, #000 36%, transparent 80%);
+  pointer-events: none;
+}
+
+/* En mobile el texto se apila más angosto: la trama abraza el bloque en vez de
+   derramarse a los costados. */
+@media (max-width: 480px) {
+  .hero__aviso::before {
+    inset: -22px -16px;
+  }
+}
+
+/* Jerarquía de tamaños + leve rotación (recorte de revista), pero centradas
+   sobre el eje del logo. */
+.hero__aviso-line--1 {
+  font-size: clamp(1.4rem, 6.5vw, 2.8rem);
+  transform: rotate(-2deg);
+}
+
+.hero__aviso-line--2 {
+  font-size: clamp(3rem, 15vw, 6rem);
+}
+
+.hero__aviso-line--3 {
+  font-size: clamp(2rem, 9.5vw, 4rem);
+  margin-top: -0.04em;
+  transform: rotate(1.5deg);
 }
 
 /* === CTAs (entradas arriba, votación debajo; centrados) === */
@@ -102,19 +126,76 @@
 }
 
 /* === Decoración repartida (lejos del texto centrado) === */
-.hero__star { position: absolute; z-index: var(--z-decor); will-change: transform; }
-.hero__star--1 { width: 30px; height: 30px; top: 10%; left: 8%; }
-.hero__star--2 { width: 24px; height: 24px; top: 16%; right: 10%; }
-.hero__star--3 { width: 26px; height: 26px; bottom: 16%; left: 12%; }
-.hero__star--4 { width: 22px; height: 22px; bottom: 12%; right: 14%; }
+.hero__star {
+  position: absolute;
+  z-index: var(--z-decor);
+  will-change: transform;
+}
 
-.hero__bricks { position: absolute; z-index: var(--z-decor); width: 96px; height: 64px; }
-.hero__bricks--tl { top: 5%; left: 3%; transform: rotate(-8deg); }
-.hero__bricks--br { bottom: 8%; right: 3%; transform: rotate(8deg); }
+.hero__star--1 {
+  width: 30px;
+  height: 30px;
+  top: 10%;
+  left: 8%;
+}
 
-.hero__dashes { position: absolute; z-index: var(--z-decor); width: 66px; height: 66px; }
-.hero__dashes--l { top: 42%; left: 2%; transform: scaleX(-1); }
-.hero__dashes--r { top: 40%; right: 2%; }
+.hero__star--2 {
+  width: 24px;
+  height: 24px;
+  top: 16%;
+  right: 10%;
+}
+
+.hero__star--3 {
+  width: 26px;
+  height: 26px;
+  bottom: 16%;
+  left: 12%;
+}
+
+.hero__star--4 {
+  width: 22px;
+  height: 22px;
+  bottom: 12%;
+  right: 14%;
+}
+
+.hero__bricks {
+  position: absolute;
+  z-index: var(--z-decor);
+  width: 96px;
+  height: 64px;
+}
+
+.hero__bricks--tl {
+  top: 5%;
+  left: 3%;
+  transform: rotate(-8deg);
+}
+
+.hero__bricks--br {
+  bottom: 8%;
+  right: 3%;
+  transform: rotate(8deg);
+}
+
+.hero__dashes {
+  position: absolute;
+  z-index: var(--z-decor);
+  width: 66px;
+  height: 66px;
+}
+
+.hero__dashes--l {
+  top: 42%;
+  left: 2%;
+  transform: scaleX(-1);
+}
+
+.hero__dashes--r {
+  top: 40%;
+  right: 2%;
+}
 
 /* === Indicador de scroll (#19) === */
 .hero__scroll {
@@ -132,20 +213,32 @@
   font-size: var(--fs-label);
   color: var(--sf-navy);
 }
+
 .hero__scroll-arrow {
   width: 26px;
   height: 26px;
   animation: hero-bounce 1.4s var(--ease-out) infinite;
 }
+
 @keyframes hero-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
 }
-.hero__scroll:focus-visible { outline: 3px solid var(--sf-navy); outline-offset: 3px; }
+
+.hero__scroll:focus-visible {
+  outline: 3px solid var(--sf-navy);
+  outline-offset: 3px;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__logo,
-  .hero__aviso,
-  .hero__ctas { animation: none; }
-  .hero__scroll-arrow { animation: none; }
+  .hero__scroll-arrow {
+    animation: none;
+  }
 }

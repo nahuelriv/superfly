@@ -7,6 +7,15 @@
   height: clamp(64px, 17vw, 96px);
   pointer-events: none; /* no intercepta taps/clicks */
   filter: drop-shadow(3px 3px 0 var(--sf-navy));
+  /* Cierra la secuencia del hero con un fade suave (sin protagonismo). */
+  opacity: 0;
+}
+:root.is-ready .vinilo {
+  animation: vinilo-in 500ms var(--ease-out) 850ms both;
+}
+@keyframes vinilo-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .vinilo__disc {

@@ -60,6 +60,15 @@
   box-shadow: 4px 4px 0 var(--sf-rosa);
   transition: transform var(--dur-fast) var(--sf-ease),
     box-shadow var(--dur-fast) var(--sf-ease);
+  /* Cierra la secuencia del hero con un fade suave. */
+  opacity: 0;
+}
+:root.is-ready .navmin__ig {
+  animation: navmin-ig-in 500ms var(--ease-out) 850ms both;
+}
+@keyframes navmin-ig-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 .navmin__ig svg { width: 20px; height: 20px; }
 
@@ -76,4 +85,5 @@
 @media (prefers-reduced-motion: reduce) {
   .navmin,
   .navmin__brand { transition: none; }
+  .navmin__ig { opacity: 1; animation: none; }
 }

@@ -104,7 +104,7 @@ export default function Fotos() {
           <Star className="fotos__star" color="var(--sf-blanco)" />
         </header>
 
-        <ul className="fotos__grid sf-stagger">
+        <ul className="fotos__grid">
           {fotosIII.map((foto, i) => renderCell(foto, i))}
         </ul>
       </div>
